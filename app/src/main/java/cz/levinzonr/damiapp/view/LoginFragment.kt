@@ -1,21 +1,28 @@
 package cz.levinzonr.damiapp.view
 
 
+import android.nfc.Tag
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import cz.levinzonr.damiapp.R
+import cz.levinzonr.damiapp.model.entities.User
 import cz.levinzonr.damiapp.presenter.LoginPresenter
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment(), LoginView {
 
     private lateinit var presenter: LoginPresenter
+
+    companion object {
+        const val TAG = "LoginFragment"
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -52,18 +59,22 @@ class LoginFragment : Fragment(), LoginView {
             }
         })
 
+        button_login.setOnClickListener({
+            presenter.startSignIn()
+        })
+
     }
 
     override fun onLoginStart() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Log.d(TAG, "Start: ")
     }
 
-    override fun onLoginFinished() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onLoginFinished(user: User) {
+        Log.d(TAG, "Finished: $user")
     }
 
     override fun onLoginError(error: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Log.d(TAG, "Error: $error")
     }
 
     override fun enableLoginButton(enable: Boolean) {

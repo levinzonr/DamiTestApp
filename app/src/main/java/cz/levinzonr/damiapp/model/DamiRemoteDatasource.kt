@@ -27,7 +27,7 @@ class DamiRemoteDatasource {
 
 
     companion object {
-        const val BASE_URL = "https://androidtest.damidev.com/api"
+        const val BASE_URL = "https://androidtest.damidev.com/api/"
     }
 
 
@@ -42,10 +42,10 @@ class DamiRemoteDatasource {
 
     interface DamiService {
 
-        @POST("/login")
+        @POST("login")
         fun login(@Body body: PostObject.Login) : Flowable<User>
 
-        @POST("/register0")
+        @POST("register0")
         fun register(@Body body: PostObject.Login) : Flowable<User>
 
     }
