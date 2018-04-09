@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import cz.levinzonr.damiapp.R
+import kotlinx.android.synthetic.main.activity_not_signed.*
 
 class LoginFragment : Fragment() {
 
