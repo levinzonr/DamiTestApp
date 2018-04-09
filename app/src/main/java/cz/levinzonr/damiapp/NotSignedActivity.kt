@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import cz.levinzonr.damiapp.view.LoginFragment
 import cz.levinzonr.damiapp.view.MapsFragment
@@ -41,6 +42,20 @@ class NotSignedActivity : AppCompatActivity() {
         adapter.addFragment(LoginFragment())
         adapter.addFragment(MapsFragment())
         viewPager.adapter = adapter
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
+            private var prev = 0
+            override fun onPageScrollStateChanged(state: Int) {
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            }
+
+            override fun onPageSelected(position: Int) {
+                navigation.menu.getItem(prev).isChecked = false
+                navigation.menu.getItem(position).isChecked = true
+                prev = position
+            }
+        })
     }
 
     inner class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
@@ -50,7 +65,6 @@ class NotSignedActivity : AppCompatActivity() {
         fun addFragment(fragment: Fragment) {
             fragments.add(fragment)
         }
-
         override fun getItem(position: Int): Fragment = fragments[position]
 
         override fun getCount(): Int = fragments.size
