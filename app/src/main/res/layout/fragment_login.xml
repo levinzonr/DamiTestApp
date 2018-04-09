@@ -9,7 +9,7 @@
 
     <ImageView
         android:layout_margin="30dp"
-        android:src="@drawable/damiGreenLogo_crop"
+        android:src="@drawable/dami_log"
         android:layout_width="match_parent"
         android:layout_height="100dp" />
 
@@ -29,6 +29,7 @@
 
 
     <Button
+        android:enabled="false"
         android:id="@+id/button_login"
         android:text="@string/action_login"
         android:layout_gravity="center"

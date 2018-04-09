@@ -4,6 +4,6 @@ interface Presenter<in V> {
 
     fun attachView(view : V)
 
-    fun detachView(view: V)
+    fun detachView()
 
 }

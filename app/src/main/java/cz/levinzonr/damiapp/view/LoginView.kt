@@ -8,4 +8,6 @@ interface LoginView {
 
     fun onLoginError(error: String)
 
+    fun enableLoginButton(enable: Boolean)
+
 }

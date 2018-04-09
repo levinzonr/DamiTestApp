@@ -2,8 +2,14 @@ package cz.levinzonr.damiapp.model.entities
 
 class PostObject {
 
-    inner class Login(
-            val email: String,
-            val password: String
-    )
+     class Login() {
+        var email = ""
+        var password = ""
+
+        constructor(_email: String, _password: String) : this () {
+            email = _email
+            password = _password
+        }
+
+    }
 }
