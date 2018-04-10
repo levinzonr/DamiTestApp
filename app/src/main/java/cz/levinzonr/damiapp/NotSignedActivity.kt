@@ -5,12 +5,9 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
-import android.view.View
-import cz.levinzonr.damiapp.view.LoginFragment
+import cz.levinzonr.damiapp.view.login.LoginFragment
 import cz.levinzonr.damiapp.view.MapsFragment
 import kotlinx.android.synthetic.main.activity_not_signed.*
 

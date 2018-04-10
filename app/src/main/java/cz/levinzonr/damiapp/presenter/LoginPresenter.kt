@@ -4,7 +4,7 @@ import cz.levinzonr.damiapp.utils.ErrorHandler
 import cz.levinzonr.damiapp.model.DamiRemoteDatasource
 import cz.levinzonr.damiapp.model.entities.PostObject
 import cz.levinzonr.damiapp.model.entities.Response
-import cz.levinzonr.damiapp.view.LoginView
+import cz.levinzonr.damiapp.view.login.LoginView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
