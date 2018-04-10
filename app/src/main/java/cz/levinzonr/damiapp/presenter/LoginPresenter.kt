@@ -1,12 +1,9 @@
 package cz.levinzonr.damiapp.presenter
 
-import android.util.Log
-import com.google.gson.Gson
-import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
+import cz.levinzonr.damiapp.utils.ErrorHandler
 import cz.levinzonr.damiapp.model.DamiRemoteDatasource
 import cz.levinzonr.damiapp.model.entities.PostObject
 import cz.levinzonr.damiapp.model.entities.Response
-import cz.levinzonr.damiapp.model.entities.User
 import cz.levinzonr.damiapp.view.LoginView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -34,13 +31,7 @@ class LoginPresenter : Presenter<LoginView> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         { t: Response? ->  view?.onLoginFinished(t!!.response)},
-                        {t: Throwable? ->
-                            view?.onLoginError(t.toString())
-                            if (t is HttpException) {
-                                val a = t.response().errorBody().string()
-                                val reps = Gson().fromJson(a, Response::class.java)
-                                Log.d("EROR: ", reps.responseCodeText)
-                            }
+                        {t: Throwable? -> view?.onLoginError(ErrorHandler().handleError(t!!))
                         }
                 )
         )
