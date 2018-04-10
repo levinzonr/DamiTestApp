@@ -13,13 +13,13 @@ class ErrorHandler {
             e is HttpException -> handleApiError(e)
             e is SocketTimeoutException -> "Connection timeout"
             e is IOException -> "Network error"
-            else -> "Unkown error"
+            else -> "Unkown error: $e"
 
         }
     }
 
     private fun handleApiError(e: HttpException) : String {
-        val response = Gson().fromJson(e.response().errorBody().string(), Response::class.java)
+        val response = Gson().fromJson(e.response().errorBody().string(), Response.BAD::class.java)
         return response.responseCodeText
     }
 

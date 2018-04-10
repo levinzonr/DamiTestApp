@@ -33,11 +33,11 @@ class DamiRemoteDatasource {
     }
 
 
-    fun userLogin(user : PostObject.Login) : Flowable<Response> {
+    fun userLogin(user : PostObject.Login) : Flowable<Response.OK> {
         return service.login(user.email, user.password)
     }
 
-    fun userRegister(user: PostObject.Register) : Flowable<Response> {
+    fun userRegister(user: PostObject.Register) : Flowable<Response.OK> {
         return service.register(user.email, user.password)
     }
 
@@ -45,11 +45,11 @@ class DamiRemoteDatasource {
     interface DamiService {
         @FormUrlEncoded
         @POST("login")
-        fun login(@Field("email" ) email:String, @Field("password") password: String) : Flowable<Response>
+        fun login(@Field("email" ) email:String, @Field("password") password: String) : Flowable<Response.OK>
 
         @FormUrlEncoded
         @POST("register")
-        fun register(@Field("email") email:String, @Field("password") password: String) : Flowable<Response>
+        fun register(@Field("email") email:String, @Field("password") password: String) : Flowable<Response.OK>
     }
 
 }

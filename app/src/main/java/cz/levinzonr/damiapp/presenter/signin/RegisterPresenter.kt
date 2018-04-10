@@ -15,6 +15,7 @@ class RegisterPresenter : SingInPresenter(){
     private val remote = DamiRemoteDatasource()
 
     override fun validate() {
+
         view?.allowSignIn(
                 user.email.isNotEmpty() &&
                         user.password.isNotEmpty() &&
@@ -29,7 +30,7 @@ class RegisterPresenter : SingInPresenter(){
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        {responce: Response? ->
+                        {responce: Response.OK? ->
                             Thread.sleep(1000)
                             view?.onSignInFinished(responce!!.response)},
                         {error: Throwable? ->

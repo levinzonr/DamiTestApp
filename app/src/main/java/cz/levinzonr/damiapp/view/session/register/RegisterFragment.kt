@@ -41,6 +41,7 @@ class RegisterFragment : BaseSignInFragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter = RegisterPresenter()
+        presenter.attachView(this)
         input_email.addTextChangedListener(EditTextListener{presenter.setEmail(it)})
         input_password.addTextChangedListener(EditTextListener{presenter.setPassword(it)})
         input_password.addTextChangedListener(EditTextListener{presenter.setPasswordConfirm(it)})
@@ -68,5 +69,6 @@ class RegisterFragment : BaseSignInFragment() {
         super.onSignInFinished(user)
         Log.d(TAG,"Done: ${user.token}")
     }
+
 
 }

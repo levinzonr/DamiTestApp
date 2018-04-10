@@ -5,13 +5,21 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
+import android.view.ViewGroup
 import cz.levinzonr.damiapp.view.session.login.LoginFragment
 import cz.levinzonr.damiapp.view.MapsFragment
+import cz.levinzonr.damiapp.view.session.BaseSignInFragment
+import cz.levinzonr.damiapp.view.session.register.RegisterFragment
 import kotlinx.android.synthetic.main.activity_not_signed.*
+import kotlinx.android.synthetic.main.fragment_register.*
 
-class NotSignedActivity : AppCompatActivity() {
+class NotSignedActivity : AppCompatActivity(), BaseSignInFragment.SignInInteractionListener {
+
+    private lateinit var adapter: ViewPagerAdapter
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -27,6 +35,9 @@ class NotSignedActivity : AppCompatActivity() {
         false
     }
 
+    override fun registerMode(boolean: Boolean) {
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_not_signed)
@@ -35,8 +46,8 @@ class NotSignedActivity : AppCompatActivity() {
     }
 
     private fun initViewPager(viewPager: ViewPager) {
-        val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(LoginFragment())
+        adapter = ViewPagerAdapter(supportFragmentManager, viewPager)
+        adapter.addFragment(RegisterFragment())
         adapter.addFragment(MapsFragment())
         viewPager.adapter = adapter
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
@@ -55,13 +66,14 @@ class NotSignedActivity : AppCompatActivity() {
         })
     }
 
-    inner class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+    inner class ViewPagerAdapter(fm: FragmentManager, val view: ViewGroup) : FragmentPagerAdapter(fm) {
 
         private val fragments = ArrayList<Fragment>()
 
         fun addFragment(fragment: Fragment) {
             fragments.add(fragment)
         }
+
         override fun getItem(position: Int): Fragment = fragments[position]
 
         override fun getCount(): Int = fragments.size

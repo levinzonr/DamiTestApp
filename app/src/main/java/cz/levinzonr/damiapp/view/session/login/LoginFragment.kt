@@ -39,6 +39,10 @@ class LoginFragment : BaseSignInFragment() {
             presenter.startSignIn()
         })
 
+        button_register.setOnClickListener({
+            listener.registerMode(true)
+        })
+
     }
 
     override fun onDestroy() {

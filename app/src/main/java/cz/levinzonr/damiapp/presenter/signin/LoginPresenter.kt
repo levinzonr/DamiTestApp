@@ -22,7 +22,7 @@ class LoginPresenter : SingInPresenter(){
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { t: Response? ->          Thread.sleep(1000)
+                        { t: Response.OK? ->          Thread.sleep(1000)
                             view?.onSignInFinished(t!!.response)},
                         {t: Throwable? ->         Thread.sleep(1000)
                              view?.onSignInError(ErrorHandler().handleError(t!!))
