@@ -2,7 +2,7 @@ package cz.levinzonr.damiapp.utils
 
 import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
-import cz.levinzonr.damiapp.model.entities.Response
+import cz.levinzonr.damiapp.model.remote.Response
 import java.io.IOException
 import java.net.SocketTimeoutException
 

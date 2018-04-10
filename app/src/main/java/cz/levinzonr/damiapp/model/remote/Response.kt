@@ -1,4 +1,6 @@
-package cz.levinzonr.damiapp.model.entities
+package cz.levinzonr.damiapp.model.remote
+
+import cz.levinzonr.damiapp.model.entities.User
 
 class Response{
 

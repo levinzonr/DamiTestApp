@@ -1,4 +1,4 @@
-package cz.levinzonr.damiapp.model.entities
+package cz.levinzonr.damiapp.model.remote
 
 class PostObject {
 

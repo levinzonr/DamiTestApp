@@ -1,8 +1,8 @@
 package cz.levinzonr.damiapp.presenter.signin
 
-import cz.levinzonr.damiapp.model.DamiRemoteDatasource
-import cz.levinzonr.damiapp.model.entities.PostObject
-import cz.levinzonr.damiapp.model.entities.Response
+import cz.levinzonr.damiapp.model.remote.DamiRemoteDatasource
+import cz.levinzonr.damiapp.model.remote.PostObject
+import cz.levinzonr.damiapp.model.remote.Response
 import cz.levinzonr.damiapp.utils.ErrorHandler
 import cz.levinzonr.damiapp.view.session.SignInView
 import io.reactivex.android.schedulers.AndroidSchedulers

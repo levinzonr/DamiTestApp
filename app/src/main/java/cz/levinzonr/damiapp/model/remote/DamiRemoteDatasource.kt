@@ -1,18 +1,12 @@
-package cz.levinzonr.damiapp.model
+package cz.levinzonr.damiapp.model.remote
 
-import android.util.Xml
 import com.google.gson.FieldNamingPolicy
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import cz.levinzonr.damiapp.model.entities.PostObject
-import cz.levinzonr.damiapp.model.entities.Response
-import cz.levinzonr.damiapp.model.entities.User
 import io.reactivex.Flowable
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
-import java.util.concurrent.TimeUnit
 
 class DamiRemoteDatasource {
 
