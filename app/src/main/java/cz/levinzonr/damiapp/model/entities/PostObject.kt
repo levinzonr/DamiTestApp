@@ -8,8 +8,8 @@ class PostObject {
     }
 
     class Register() {
-        val email = ""
-        val password = ""
-        val passwordConfirm = ""
+        var email = ""
+        var password = ""
+        var passwordConfirm = ""
     }
 }

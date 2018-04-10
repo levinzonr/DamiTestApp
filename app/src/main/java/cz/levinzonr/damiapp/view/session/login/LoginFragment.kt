@@ -2,8 +2,6 @@ package cz.levinzonr.damiapp.view.session.login
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +9,8 @@ import android.view.ViewGroup
 
 import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.extensions.EditTextListener
-import cz.levinzonr.damiapp.presenter.LoginPresenter
+import cz.levinzonr.damiapp.model.entities.User
+import cz.levinzonr.damiapp.presenter.signin.LoginPresenter
 import cz.levinzonr.damiapp.view.session.BaseSignInFragment
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -49,5 +48,15 @@ class LoginFragment : BaseSignInFragment() {
 
     override fun allowSignIn(enable: Boolean) {
         button_login.isEnabled = enable
+    }
+
+    override fun onSignInError(error: String) {
+        super.onSignInError(error)
+        Log.d(TAG, "Error: $error")
+    }
+
+    override fun onSignInFinished(user: User) {
+        super.onSignInFinished(user)
+        Log.d(TAG,"Done: ${user.token}")
     }
 }

@@ -1,30 +1,22 @@
-package cz.levinzonr.damiapp.presenter
+package cz.levinzonr.damiapp.presenter.signin
 
 import cz.levinzonr.damiapp.utils.ErrorHandler
 import cz.levinzonr.damiapp.model.DamiRemoteDatasource
 import cz.levinzonr.damiapp.model.entities.PostObject
 import cz.levinzonr.damiapp.model.entities.Response
-import cz.levinzonr.damiapp.view.session.SignInView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class LoginPresenter : Presenter<SignInView> {
+class LoginPresenter : SingInPresenter(){
 
-    private var view: SignInView? = null
     private var loginObject = PostObject.Login()
     private var cd = CompositeDisposable()
     private val remote = DamiRemoteDatasource()
 
-    override fun attachView(view: SignInView) {
-        this.view = view
-    }
 
-    override fun detachView() {
-        this.view = null
-    }
 
-    fun startSignIn() {
+    override fun startSignIn() {
         view?.onSingInStarted()
         cd.add(remote.userLogin(loginObject)
                 .subscribeOn(Schedulers.io())
@@ -39,7 +31,7 @@ class LoginPresenter : Presenter<SignInView> {
         )
     }
 
-    private fun validate() {
+    override fun validate() {
         view?.allowSignIn(
                 loginObject.password.isNotEmpty() && loginObject.email.isNotEmpty())
     }
@@ -53,5 +45,7 @@ class LoginPresenter : Presenter<SignInView> {
         loginObject.password = text
         validate()
     }
+
+
 
 }

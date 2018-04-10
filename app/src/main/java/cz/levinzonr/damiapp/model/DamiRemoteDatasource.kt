@@ -37,7 +37,7 @@ class DamiRemoteDatasource {
         return service.login(user.email, user.password)
     }
 
-    fun userRegister(user: PostObject.Login) : Flowable<Response> {
+    fun userRegister(user: PostObject.Register) : Flowable<Response> {
         return service.register(user.email, user.password)
     }
 
