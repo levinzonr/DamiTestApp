@@ -4,6 +4,7 @@ package cz.levinzonr.damiapp.view
 import android.nfc.Tag
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -54,7 +55,13 @@ class LoginFragment : Fragment(), LoginView {
     }
 
     override fun onLoginError(error: String) {
-        Log.d(TAG, "Error: $error")
+        val dialog = AlertDialog.Builder(context)
+                .setTitle(R.string.error_title_login)
+                .setMessage(error)
+                .setNeutralButton(android.R.string.ok, {_, _ -> })
+                .create()
+        dialog.show()
+
     }
 
     override fun enableLoginButton(enable: Boolean) {
