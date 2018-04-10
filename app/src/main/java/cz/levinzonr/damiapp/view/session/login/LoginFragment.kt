@@ -1,4 +1,4 @@
-package cz.levinzonr.damiapp.view.login
+package cz.levinzonr.damiapp.view.session.login
 
 
 import android.os.Bundle
@@ -11,14 +11,13 @@ import android.view.ViewGroup
 
 import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.extensions.EditTextListener
-import cz.levinzonr.damiapp.model.entities.User
 import cz.levinzonr.damiapp.presenter.LoginPresenter
+import cz.levinzonr.damiapp.view.session.BaseSignInFragment
 import kotlinx.android.synthetic.main.fragment_login.*
 
-class LoginFragment : Fragment(), LoginView {
+class LoginFragment : BaseSignInFragment() {
 
     private lateinit var presenter: LoginPresenter
-    private lateinit var progressDialog: AlertDialog
 
     companion object {
         const val TAG = "LoginFragment"
@@ -26,10 +25,6 @@ class LoginFragment : Fragment(), LoginView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        progressDialog = AlertDialog.Builder(context)
-                .setView(inflater.inflate(R.layout.dialog_progress, container, false))
-                .setCancelable(false)
-                .create()
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
@@ -47,34 +42,12 @@ class LoginFragment : Fragment(), LoginView {
 
     }
 
-    override fun onLoginStart() {
-        Log.d(TAG, "Start: ")
-        progressDialog.show()
-    }
-
-    override fun onLoginFinished(user: User) {
-        Log.d(TAG, "Finished: ${user.token}")
-        progressDialog.cancel()
-    }
-
-    override fun onLoginError(error: String) {
-        progressDialog.cancel()
-        val dialog = AlertDialog.Builder(context)
-                .setTitle(R.string.error_title_login)
-                .setMessage(error)
-                .setNeutralButton(android.R.string.ok, {_, _ -> })
-                .create()
-        dialog.show()
-
-    }
-
-    override fun enableLoginButton(enable: Boolean) {
-        button_login.isEnabled = enable
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         presenter.detachView()
     }
 
+    override fun allowSignIn(enable: Boolean) {
+        button_login.isEnabled = enable
+    }
 }
