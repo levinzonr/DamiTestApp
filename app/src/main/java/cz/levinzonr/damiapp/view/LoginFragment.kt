@@ -70,7 +70,7 @@ class LoginFragment : Fragment(), LoginView {
     }
 
     override fun onLoginFinished(user: User) {
-        Log.d(TAG, "Finished: $user")
+        Log.d(TAG, "Finished: ${user.token}")
     }
 
     override fun onLoginError(error: String) {

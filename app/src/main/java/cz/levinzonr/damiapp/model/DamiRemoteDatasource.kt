@@ -1,16 +1,17 @@
 package cz.levinzonr.damiapp.model
 
+import android.util.Xml
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import cz.levinzonr.damiapp.model.entities.PostObject
+import cz.levinzonr.damiapp.model.entities.Response
 import cz.levinzonr.damiapp.model.entities.User
 import io.reactivex.Flowable
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.POST
+import retrofit2.http.*
 
 class DamiRemoteDatasource {
 
@@ -31,23 +32,23 @@ class DamiRemoteDatasource {
     }
 
 
-    fun userLogin(user : PostObject.Login) : Flowable<User> {
-        return service.login(user)
+    fun userLogin(user : PostObject.Login) : Flowable<Response> {
+        return service.login(user.email, user.password)
     }
 
-    fun userRegister(user: PostObject.Login) : Flowable<User> {
-        return service.register(user)
+    fun userRegister(user: PostObject.Login) : Flowable<Response> {
+        return service.register(user.email, user.password)
     }
 
 
     interface DamiService {
-
+        @FormUrlEncoded
         @POST("login")
-        fun login(@Body body: PostObject.Login) : Flowable<User>
+        fun login(@Field("email" ) email:String, @Field("password") password: String) : Flowable<Response>
 
-        @POST("register0")
-        fun register(@Body body: PostObject.Login) : Flowable<User>
-
+        @FormUrlEncoded
+        @POST("register")
+        fun register(@Field("email") email:String, @Field("password") password: String) : Flowable<Response>
     }
 
 }
