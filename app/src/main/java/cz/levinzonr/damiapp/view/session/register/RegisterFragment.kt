@@ -13,6 +13,7 @@ import cz.levinzonr.damiapp.extensions.EditTextListener
 import cz.levinzonr.damiapp.model.entities.User
 import cz.levinzonr.damiapp.presenter.signin.RegisterPresenter
 import cz.levinzonr.damiapp.view.session.BaseSignInFragment
+import cz.levinzonr.damiapp.view.session.SignInView
 import kotlinx.android.synthetic.main.fragment_register.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -44,7 +45,7 @@ class RegisterFragment : BaseSignInFragment() {
         presenter.attachView(this)
         input_email.addTextChangedListener(EditTextListener{presenter.setEmail(it)})
         input_password.addTextChangedListener(EditTextListener{presenter.setPassword(it)})
-        input_password.addTextChangedListener(EditTextListener{presenter.setPasswordConfirm(it)})
+        input_password_confirm.addTextChangedListener(EditTextListener{presenter.setPasswordConfirm(it)})
         button_register.setOnClickListener({
             presenter.startSignIn()
         })
@@ -52,6 +53,7 @@ class RegisterFragment : BaseSignInFragment() {
     }
 
     override fun allowSignIn(enable: Boolean) {
+        Log.d(TAG, "Enabled: $enable")
         button_register.isEnabled = enable
     }
 
@@ -70,5 +72,12 @@ class RegisterFragment : BaseSignInFragment() {
         Log.d(TAG,"Done: ${user.token}")
     }
 
+    override fun showHintMessage( status: SignInView.Status) {
+        hint_view.visibility = View.VISIBLE
+        when(status) {
+            SignInView.Status.EMPTY_FIELD -> hint_view.text = "Empty field"
+            SignInView.Status.PASSWORD_MISMATCH -> hint_view.text = "Mismatch"
+        }
+    }
 
 }

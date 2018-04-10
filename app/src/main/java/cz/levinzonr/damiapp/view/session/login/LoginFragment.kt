@@ -12,6 +12,7 @@ import cz.levinzonr.damiapp.extensions.EditTextListener
 import cz.levinzonr.damiapp.model.entities.User
 import cz.levinzonr.damiapp.presenter.signin.LoginPresenter
 import cz.levinzonr.damiapp.view.session.BaseSignInFragment
+import cz.levinzonr.damiapp.view.session.SignInView
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : BaseSignInFragment() {
@@ -63,4 +64,15 @@ class LoginFragment : BaseSignInFragment() {
         super.onSignInFinished(user)
         Log.d(TAG,"Done: ${user.token}")
     }
+
+    override fun showHintMessage(status: SignInView.Status) {
+        hint_view.visibility = View.VISIBLE
+        when(status) {
+            SignInView.Status.EMPTY_FIELD -> hint_view.text = "Empty field"
+            SignInView.Status.PASSWORD_MISMATCH -> hint_view.text = "Mismatch"
+
+        }
+    }
+
+
 }

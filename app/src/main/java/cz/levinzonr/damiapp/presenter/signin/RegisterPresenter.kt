@@ -4,6 +4,7 @@ import cz.levinzonr.damiapp.model.DamiRemoteDatasource
 import cz.levinzonr.damiapp.model.entities.PostObject
 import cz.levinzonr.damiapp.model.entities.Response
 import cz.levinzonr.damiapp.utils.ErrorHandler
+import cz.levinzonr.damiapp.view.session.SignInView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -15,13 +16,16 @@ class RegisterPresenter : SingInPresenter(){
     private val remote = DamiRemoteDatasource()
 
     override fun validate() {
-
-        view?.allowSignIn(
-                user.email.isNotEmpty() &&
-                        user.password.isNotEmpty() &&
-                        user.passwordConfirm.isNotEmpty() &&
-                        user.passwordConfirm == user.password
-        )
+        if (user.passwordConfirm.isEmpty() || user.password.isEmpty()
+        || user.email.isEmpty()) {
+            view?.allowSignIn(false)
+            view?.showHintMessage( SignInView.Status.EMPTY_FIELD)
+        } else if (user.password != user.passwordConfirm) {
+            view?.showHintMessage( SignInView.Status.PASSWORD_MISMATCH)
+            view?.allowSignIn(false)
+        } else {
+            view?.allowSignIn(true)
+        }
     }
 
     override fun startSignIn() {
@@ -41,14 +45,17 @@ class RegisterPresenter : SingInPresenter(){
 
     fun setEmail(text: String) {
         user.email = text
+        validate()
     }
 
     fun setPassword(text: String) {
         user.password = text
+        validate()
     }
 
     fun setPasswordConfirm(text: String) {
         user.passwordConfirm = text
+        validate()
     }
 
 }

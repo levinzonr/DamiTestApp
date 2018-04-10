@@ -4,6 +4,7 @@ import cz.levinzonr.damiapp.utils.ErrorHandler
 import cz.levinzonr.damiapp.model.DamiRemoteDatasource
 import cz.levinzonr.damiapp.model.entities.PostObject
 import cz.levinzonr.damiapp.model.entities.Response
+import cz.levinzonr.damiapp.view.session.SignInView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -32,9 +33,12 @@ class LoginPresenter : SingInPresenter(){
     }
 
     override fun validate() {
-        view?.allowSignIn(
-                loginObject.password.isNotEmpty() && loginObject.email.isNotEmpty())
+        if (loginObject.password.isEmpty() || loginObject.email.isEmpty()) {
+            view?.allowSignIn(false)
+            view?.showHintMessage(SignInView.Status.EMPTY_FIELD)
+        }
     }
+
 
     fun setEmail(text: String) {
         loginObject.email = text

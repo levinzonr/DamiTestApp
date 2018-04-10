@@ -8,6 +8,17 @@
     tools:context=".view.session.register.RegisterFragment">
 
 
+    <TextView
+        android:id="@+id/hint_view"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        tools:visibility="visible"
+        android:visibility="gone"
+        tools:text="@string/action_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <EditText
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
@@ -39,6 +50,7 @@
         android:layout_height="wrap_content" />
 
     <Button
+        android:enabled="false"
         android:text="@string/action_register"
         android:id="@+id/button_register"
         android:layout_margin="10dp"
