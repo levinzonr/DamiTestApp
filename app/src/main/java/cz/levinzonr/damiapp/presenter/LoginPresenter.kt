@@ -30,8 +30,10 @@ class LoginPresenter : Presenter<LoginView> {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { t: Response? ->  view?.onLoginFinished(t!!.response)},
-                        {t: Throwable? -> view?.onLoginError(ErrorHandler().handleError(t!!))
+                        { t: Response? ->          Thread.sleep(1000)
+                            view?.onLoginFinished(t!!.response)},
+                        {t: Throwable? ->         Thread.sleep(1000)
+                             view?.onLoginError(ErrorHandler().handleError(t!!))
                         }
                 )
         )

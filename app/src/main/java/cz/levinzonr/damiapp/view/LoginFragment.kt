@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.fragment_login.*
 class LoginFragment : Fragment(), LoginView {
 
     private lateinit var presenter: LoginPresenter
+    private lateinit var progressDialog: AlertDialog
 
     companion object {
         const val TAG = "LoginFragment"
@@ -28,7 +29,10 @@ class LoginFragment : Fragment(), LoginView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+        progressDialog = AlertDialog.Builder(context)
+                .setView(inflater.inflate(R.layout.dialog_progress, container, false))
+                .setCancelable(false)
+                .create()
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
@@ -48,13 +52,16 @@ class LoginFragment : Fragment(), LoginView {
 
     override fun onLoginStart() {
         Log.d(TAG, "Start: ")
+        progressDialog.show()
     }
 
     override fun onLoginFinished(user: User) {
         Log.d(TAG, "Finished: ${user.token}")
+        progressDialog.cancel()
     }
 
     override fun onLoginError(error: String) {
+        progressDialog.cancel()
         val dialog = AlertDialog.Builder(context)
                 .setTitle(R.string.error_title_login)
                 .setMessage(error)
