@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import cz.levinzonr.damiapp.R
+import cz.levinzonr.damiapp.extensions.EditTextListener
 import cz.levinzonr.damiapp.model.entities.User
 import cz.levinzonr.damiapp.presenter.LoginPresenter
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -35,29 +36,8 @@ class LoginFragment : Fragment(), LoginView {
         presenter = LoginPresenter()
         presenter.attachView(this)
 
-        input_email.addTextChangedListener(object : TextWatcher{
-            override fun afterTextChanged(p0: Editable?) {
-            }
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                presenter.setEmail(p0.toString())
-            }
-        })
-
-        input_password.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {
-            }
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                presenter.setPassword(p0.toString())
-            }
-        })
+        input_email.addTextChangedListener(EditTextListener{presenter.setEmail(it)})
+        input_password.addTextChangedListener(EditTextListener{presenter.setPassword(it)})
 
         button_login.setOnClickListener({
             presenter.startSignIn()
