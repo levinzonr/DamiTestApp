@@ -29,5 +29,6 @@
     <string name="title_subitems">Other</string>
     <string name="unknown_name">Unknown name</string>
     <string name="action_logout_msg">Are you sure you want to logout?</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
