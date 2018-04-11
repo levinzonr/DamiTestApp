@@ -11,13 +11,13 @@ import android.arch.persistence.room.Relation
          @PrimaryKey
          val id: Int,
          val email: String,
-         val name: String,
-         val lastName: String,
-         val description: String,
+         val name: String?,
+         val lastName: String?,
+         val description: String?,
          val rights: String,
-         val photo: String,
+         val photo: String?,
 
-         @Relation(parentColumn = "id", entityColumn = "")
+         @Relation(parentColumn = "id", entityColumn = "userId")
          val favorites: ArrayList<MapPoint>,
 
          @Ignore
