@@ -30,6 +30,10 @@ import android.arch.persistence.room.Relation
 
     constructor() : this(-1, "mail", null,null,null, "admin", null, ArrayList<MapPoint>(), "")
 
+    fun displayName() : String{
+        return "$name $lastName"
+    }
+
 }
 
 

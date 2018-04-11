@@ -9,17 +9,26 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import cz.levinzonr.damiapp.R
+import cz.levinzonr.damiapp.model.entities.User
 import cz.levinzonr.damiapp.model.local.DamiLocalDatasource
+import cz.levinzonr.damiapp.presenter.MainPresenter
 import kotlinx.android.synthetic.main.activity_signed_in.*
 import kotlinx.android.synthetic.main.app_bar_signed_in.*
+import kotlinx.android.synthetic.main.nav_header_signed_in.*
 
-class SignedInActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class SignedInActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, MainView {
+
+    private lateinit var presenter : MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signed_in)
         setSupportActionBar(toolbar)
+        presenter = MainPresenter()
+        presenter.attachView(this)
+        presenter.getUserInfo()
         val local = DamiLocalDatasource(this)
 
         if (!local.isLoggedIn()) {
@@ -52,5 +61,15 @@ class SignedInActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    override fun onUserInfoLoaded(user: User) {
+        drawer_layout.findViewById<TextView>(R.id.drawer_email).text = user.email
+        drawer_layout.findViewById<TextView>(R.id.drawer_name).text = user.displayName()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.detachView()
     }
 }

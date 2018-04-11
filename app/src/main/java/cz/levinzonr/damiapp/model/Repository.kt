@@ -26,4 +26,8 @@ class Repository {
         }
     }
 
+    fun getCurrentUser() : Flowable<User> {
+        return local.getCurrentUser()
+    }
+
 }

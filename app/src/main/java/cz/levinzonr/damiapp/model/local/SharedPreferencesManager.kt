@@ -31,5 +31,9 @@ class SharedPreferencesManager(context: Context) {
         return preferences.getString(USER_TOKEN, null)
     }
 
+    fun getUserId() : Int {
+        return preferences.getInt(USER_ID, 0)
+    }
+
 
 }
