@@ -22,4 +22,10 @@ import android.arch.persistence.room.Relation
 
          @Ignore
          val token: String
-)
+) {
+    init {
+        for (point in favorites) {
+            point.userId = id
+        }
+    }
+}
