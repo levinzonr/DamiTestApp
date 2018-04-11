@@ -7,6 +7,7 @@ import cz.levinzonr.damiapp.model.local.DamiLocalDatasource
 import cz.levinzonr.damiapp.model.remote.DamiRemoteDatasource
 import cz.levinzonr.damiapp.model.remote.PostObject
 import cz.levinzonr.damiapp.model.remote.Response
+import io.reactivex.Completable
 import io.reactivex.Flowable
 
 class Repository {
@@ -28,6 +29,10 @@ class Repository {
 
     fun getCurrentUser() : Flowable<User> {
         return local.getCurrentUser()
+    }
+
+    fun logout() : Completable {
+        return Completable.fromCallable { local.logout() }
     }
 
 }

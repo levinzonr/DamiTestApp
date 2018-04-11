@@ -24,6 +24,13 @@ class MainPresenter : Presenter<MainView> {
                 .subscribe({user: User? -> if (user!=null)  view?.onUserInfoLoaded(user) }))
     }
 
+    fun logout() {
+        cd.add(repository.logout()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ view?.onLogoutComplete()}))
+    }
+
     override fun detachView() {
         view = null
         if (!cd.isDisposed) cd.dispose()

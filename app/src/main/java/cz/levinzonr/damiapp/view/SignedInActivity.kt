@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -28,7 +29,6 @@ class SignedInActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         setSupportActionBar(toolbar)
         presenter = MainPresenter()
         presenter.attachView(this)
-        presenter.getUserInfo()
         val local = DamiLocalDatasource(this)
 
         if (!local.isLoggedIn()) {
@@ -45,6 +45,11 @@ class SignedInActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         nav_view.setNavigationItemSelectedListener(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.getUserInfo()
+    }
+
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
@@ -57,6 +62,14 @@ class SignedInActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
+            R.id.button_logout -> {
+                AlertDialog.Builder(this)
+                        .setTitle(R.string.action_logout)
+                        .setMessage(R.string.action_logout_msg)
+                        .setPositiveButton(android.R.string.yes,{_, _ -> presenter.logout()})
+                        .setNegativeButton(android.R.string.no, {_, _ -> })
+                        .create().show()
+            }
          }
 
         drawer_layout.closeDrawer(GravityCompat.START)
@@ -66,6 +79,11 @@ class SignedInActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     override fun onUserInfoLoaded(user: User) {
         drawer_layout.findViewById<TextView>(R.id.drawer_email).text = user.email
         drawer_layout.findViewById<TextView>(R.id.drawer_name).text = user.displayName()
+    }
+
+    override fun onLogoutComplete() {
+        startActivity(Intent(this, NotSignedActivity::class.java))
+        finish()
     }
 
     override fun onDestroy() {

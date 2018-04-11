@@ -30,6 +30,10 @@ class DamiLocalDatasource(application: Context) {
         return db.userDao().findById(id)
     }
 
+    fun logout() {
+        prefs.clear()
+    }
+
 
 
 }

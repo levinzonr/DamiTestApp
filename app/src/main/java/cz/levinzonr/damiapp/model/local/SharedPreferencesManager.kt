@@ -35,5 +35,12 @@ class SharedPreferencesManager(context: Context) {
         return preferences.getInt(USER_ID, 0)
     }
 
+    fun clear() {
+        preferences.edit()
+                .remove(USER_ID)
+                .remove(USER_TOKEN)
+                .apply()
+    }
+
 
 }
