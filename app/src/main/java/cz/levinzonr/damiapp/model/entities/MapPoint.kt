@@ -12,33 +12,13 @@ import kotlin.collections.ArrayList
         onDelete = ForeignKey.CASCADE)])
 class MapPoint(
         @PrimaryKey
-        val id: Int,
+        var id: Int,
         var userId: Int,
-        val lat: Double,
-        val lng: Double,
-        val title: String,
-        val desc: String,
+        var lat: Double,
+        var lng: Double,
+        var title: String,
+        var desc: String,
 
-        @TypeConverters(Converters::class)
-        val photo: ArrayList<String>
-) {
-
-     class Converters {
-
-        @TypeConverter
-        fun listToString(list: ArrayList<String>) : String {
-            return Gson().toJson(list)
-        }
-
-        @TypeConverter
-        fun stringToList(string: String?) : ArrayList<String> {
-            if (string == null)
-                return ArrayList()
-
-            val listType = object : TypeToken<ArrayList<String>>() {}.type
-            return Gson().fromJson(string, listType)
-        }
-    }
-
-}
+        var photo: ArrayList<String>
+)
 

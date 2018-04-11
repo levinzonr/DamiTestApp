@@ -7,25 +7,29 @@ import android.arch.persistence.room.Relation
 
 @Entity
  class User(
-
          @PrimaryKey
-         val id: Int,
-         val email: String,
-         val name: String?,
-         val lastName: String?,
-         val description: String?,
-         val rights: String,
-         val photo: String?,
-
-         @Relation(parentColumn = "id", entityColumn = "userId")
-         val favorites: ArrayList<MapPoint>,
+         var id: Int,
+         var email: String,
+         var name: String? = null,
+         var lastName: String? = null,
+         var description: String? = null,
+         var rights: String,
+         var photo: String? = null,
 
          @Ignore
-         val token: String
+         var favorites: List<MapPoint>,
+
+         @Ignore
+         var token: String
 ) {
     init {
         for (point in favorites) {
             point.userId = id
         }
     }
+
+    constructor() : this(-1, "mail", null,null,null, "admin", null, ArrayList<MapPoint>(), "")
+
 }
+
+

@@ -1,5 +1,7 @@
 package cz.levinzonr.damiapp.presenter.signin
 
+import android.content.Context
+import cz.levinzonr.damiapp.model.Repository
 import cz.levinzonr.damiapp.model.remote.DamiRemoteDatasource
 import cz.levinzonr.damiapp.model.remote.PostObject
 import cz.levinzonr.damiapp.model.remote.Response
@@ -9,11 +11,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class RegisterPresenter : SingInPresenter(){
+class RegisterPresenter(context: Context) : SingInPresenter(context){
 
     private var user = PostObject.Register()
     private var cd = CompositeDisposable()
-    private val remote = DamiRemoteDatasource()
 
     override fun validate() {
         if (user.passwordConfirm.isEmpty() || user.password.isEmpty()
@@ -30,7 +31,7 @@ class RegisterPresenter : SingInPresenter(){
 
     override fun startSignIn() {
         view?.onSingInStarted()
-        cd.add(remote.userRegister(user)
+        cd.add(repository.register(user)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

@@ -1,10 +1,15 @@
 package cz.levinzonr.damiapp.model.local
 
 import android.app.Application
-import android.arch.persistence.room.Room
-import android.arch.persistence.room.RoomDatabase
+import android.arch.persistence.room.*
 import android.content.Context
+import cz.levinzonr.damiapp.model.entities.Contact
+import cz.levinzonr.damiapp.model.entities.Converters
+import cz.levinzonr.damiapp.model.entities.MapPoint
+import cz.levinzonr.damiapp.model.entities.User
 
+@Database(version = 1, entities = [User::class, MapPoint::class, Contact::class])
+@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
     companion object {

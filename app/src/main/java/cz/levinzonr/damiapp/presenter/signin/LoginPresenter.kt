@@ -1,5 +1,6 @@
 package cz.levinzonr.damiapp.presenter.signin
 
+import android.content.Context
 import cz.levinzonr.damiapp.utils.ErrorHandler
 import cz.levinzonr.damiapp.model.remote.DamiRemoteDatasource
 import cz.levinzonr.damiapp.model.remote.PostObject
@@ -9,17 +10,16 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class LoginPresenter : SingInPresenter(){
+class LoginPresenter(context: Context): SingInPresenter(context){
 
     private var loginObject = PostObject.Login()
     private var cd = CompositeDisposable()
-    private val remote = DamiRemoteDatasource()
 
 
 
     override fun startSignIn() {
         view?.onSingInStarted()
-        cd.add(remote.userLogin(loginObject)
+        cd.add(repository.login(loginObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -36,6 +36,8 @@ class LoginPresenter : SingInPresenter(){
         if (loginObject.password.isEmpty() || loginObject.email.isEmpty()) {
             view?.allowSignIn(false)
             view?.showHintMessage(SignInView.Status.EMPTY_FIELD)
+        } else {
+            view?.allowSignIn(true)
         }
     }
 

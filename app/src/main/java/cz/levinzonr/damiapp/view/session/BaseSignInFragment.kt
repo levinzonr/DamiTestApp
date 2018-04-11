@@ -7,8 +7,6 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.model.entities.User
 
@@ -19,6 +17,7 @@ abstract class BaseSignInFragment : Fragment(), SignInView{
 
     interface SignInInteractionListener {
         fun registerMode(boolean: Boolean)
+        fun finishLogin()
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -40,6 +39,7 @@ abstract class BaseSignInFragment : Fragment(), SignInView{
 
     override fun onSignInFinished(user: User) {
         progressDialog.hide()
+        listener.finishLogin()
     }
 
     override fun onSignInError(error: String) {

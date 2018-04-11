@@ -6,10 +6,10 @@ import android.arch.persistence.room.PrimaryKey
 @Entity
 class Contact(
         @PrimaryKey
-        val id: Int,
-        val email: String,
-        val name: String?,
-        val lastname: String?,
-        val description: String?,
-        val photo: String?
+        var id: Int,
+        var email: String,
+        var name: String?,
+        var lastname: String?,
+        var description: String?,
+        var photo: String?
 )

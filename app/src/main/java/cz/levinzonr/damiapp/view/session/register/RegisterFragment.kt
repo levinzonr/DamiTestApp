@@ -41,7 +41,7 @@ class RegisterFragment : BaseSignInFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter = RegisterPresenter()
+        presenter = RegisterPresenter(context)
         presenter.attachView(this)
         input_email.addTextChangedListener(EditTextListener{presenter.setEmail(it)})
         input_password.addTextChangedListener(EditTextListener{presenter.setPassword(it)})

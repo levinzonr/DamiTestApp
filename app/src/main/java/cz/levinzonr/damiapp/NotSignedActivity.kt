@@ -1,5 +1,6 @@
 package cz.levinzonr.damiapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
@@ -12,6 +13,7 @@ import android.util.Log
 import android.view.ViewGroup
 import cz.levinzonr.damiapp.view.session.login.LoginFragment
 import cz.levinzonr.damiapp.view.MapsFragment
+import cz.levinzonr.damiapp.view.SignedInActivity
 import cz.levinzonr.damiapp.view.session.BaseSignInFragment
 import cz.levinzonr.damiapp.view.session.register.RegisterFragment
 import kotlinx.android.synthetic.main.activity_not_signed.*
@@ -38,6 +40,11 @@ class NotSignedActivity : AppCompatActivity(), BaseSignInFragment.SignInInteract
     override fun registerMode(boolean: Boolean) {
     }
 
+    override fun finishLogin() {
+        startActivity(Intent(this, SignedInActivity::class.java))
+        finish()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_not_signed)
@@ -47,7 +54,7 @@ class NotSignedActivity : AppCompatActivity(), BaseSignInFragment.SignInInteract
 
     private fun initViewPager(viewPager: ViewPager) {
         adapter = ViewPagerAdapter(supportFragmentManager, viewPager)
-        adapter.addFragment(RegisterFragment())
+        adapter.addFragment(LoginFragment())
         adapter.addFragment(MapsFragment())
         viewPager.adapter = adapter
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{

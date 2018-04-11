@@ -44,5 +44,4 @@ dependencies {
     implementation "android.arch.persistence.room:rxjava2:1.0.0"
 
 
-
 }
