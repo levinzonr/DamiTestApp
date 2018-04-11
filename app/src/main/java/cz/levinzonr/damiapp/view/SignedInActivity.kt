@@ -9,9 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import cz.levinzonr.damiapp.NotSignedActivity
 import cz.levinzonr.damiapp.R
-import cz.levinzonr.damiapp.model.Repository
 import cz.levinzonr.damiapp.model.local.DamiLocalDatasource
 import kotlinx.android.synthetic.main.activity_signed_in.*
 import kotlinx.android.synthetic.main.app_bar_signed_in.*
@@ -23,14 +21,11 @@ class SignedInActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         setContentView(R.layout.activity_signed_in)
         setSupportActionBar(toolbar)
         val local = DamiLocalDatasource(this)
+
         if (!local.isLoggedIn()) {
             val intent = Intent(this, NotSignedActivity::class.java)
             startActivity(intent)
             finish()
-        }
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
         }
 
         val toggle = ActionBarDrawerToggle(
@@ -49,21 +44,6 @@ class SignedInActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.signed_in, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        when (item.itemId) {
-            R.id.action_settings -> return true
-            else -> return super.onOptionsItemSelected(item)
-        }
-    }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.

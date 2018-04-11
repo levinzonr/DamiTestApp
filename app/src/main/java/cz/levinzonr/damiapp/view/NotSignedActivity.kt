@@ -1,4 +1,4 @@
-package cz.levinzonr.damiapp
+package cz.levinzonr.damiapp.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,18 +6,13 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.ViewGroup
+import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.view.session.login.LoginFragment
-import cz.levinzonr.damiapp.view.MapsFragment
-import cz.levinzonr.damiapp.view.SignedInActivity
 import cz.levinzonr.damiapp.view.session.BaseSignInFragment
-import cz.levinzonr.damiapp.view.session.register.RegisterFragment
 import kotlinx.android.synthetic.main.activity_not_signed.*
-import kotlinx.android.synthetic.main.fragment_register.*
 
 class NotSignedActivity : AppCompatActivity(), BaseSignInFragment.SignInInteractionListener {
 
