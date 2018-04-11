@@ -72,6 +72,7 @@ class RegisterFragment : BaseSignInFragment() {
         Log.d(TAG,"Done: ${user.token}")
     }
 
+    //TODO string from R.strings
     override fun showHintMessage( status: SignInView.Status) {
         hint_view.visibility = View.VISIBLE
         when(status) {

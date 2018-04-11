@@ -10,6 +10,7 @@ import android.view.View
 import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.model.entities.User
 
+//TODO SWAP Login/REgister fragments
 abstract class BaseSignInFragment : Fragment(), SignInView{
 
     private lateinit var progressDialog: AlertDialog
