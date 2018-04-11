@@ -75,8 +75,8 @@ class SignedInActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     }
 
     override fun onUserInfoLoaded(user: User) {
-        drawer_layout.findViewById<TextView>(R.id.drawer_email).text = user.email
-        drawer_layout.findViewById<TextView>(R.id.drawer_name).text = user.displayName()
+        nav_view.getHeaderView(0).findViewById<TextView>(R.id.drawer_email).text = user.email
+        nav_view.getHeaderView(0).findViewById<TextView>(R.id.drawer_name).text = user.displayName()
     }
 
     override fun onLogoutComplete() {
