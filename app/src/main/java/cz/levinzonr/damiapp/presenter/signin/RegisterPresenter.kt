@@ -11,7 +11,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class RegisterPresenter(context: Context) : SingInPresenter(context){
+class RegisterPresenter : SingInPresenter(){
 
     private var user = PostObject.Register()
     private var cd = CompositeDisposable()

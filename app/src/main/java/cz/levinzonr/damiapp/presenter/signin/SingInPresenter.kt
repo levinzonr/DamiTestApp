@@ -1,13 +1,12 @@
 package cz.levinzonr.damiapp.presenter.signin
 
-import android.content.Context
 import cz.levinzonr.damiapp.model.Repository
 import cz.levinzonr.damiapp.presenter.Presenter
 import cz.levinzonr.damiapp.view.session.SignInView
 
-abstract class SingInPresenter(context: Context) : Presenter<SignInView> {
+abstract class SingInPresenter : Presenter<SignInView> {
 
-    val repository = Repository(context)
+    val repository = Repository()
     var view: SignInView? = null
 
     override fun attachView(view: SignInView) {

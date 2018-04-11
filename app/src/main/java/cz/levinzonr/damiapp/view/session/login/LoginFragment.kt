@@ -30,7 +30,7 @@ class LoginFragment : BaseSignInFragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter = LoginPresenter(context)
+        presenter = LoginPresenter()
         presenter.attachView(this)
 
         input_email.addTextChangedListener(EditTextListener{presenter.setEmail(it)})

@@ -1,6 +1,7 @@
 package cz.levinzonr.damiapp.presenter.signin
 
 import android.content.Context
+import cz.levinzonr.damiapp.MyApp
 import cz.levinzonr.damiapp.utils.ErrorHandler
 import cz.levinzonr.damiapp.model.remote.DamiRemoteDatasource
 import cz.levinzonr.damiapp.model.remote.PostObject
@@ -10,7 +11,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class LoginPresenter(context: Context): SingInPresenter(context){
+class LoginPresenter: SingInPresenter(){
 
     private var loginObject = PostObject.Login()
     private var cd = CompositeDisposable()
