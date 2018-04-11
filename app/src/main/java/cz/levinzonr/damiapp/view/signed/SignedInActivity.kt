@@ -1,23 +1,21 @@
-package cz.levinzonr.damiapp.view
+package cz.levinzonr.damiapp.view.signed
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.model.entities.User
 import cz.levinzonr.damiapp.model.local.DamiLocalDatasource
 import cz.levinzonr.damiapp.presenter.MainPresenter
+import cz.levinzonr.damiapp.view.unsigned.NotSignedActivity
 import kotlinx.android.synthetic.main.activity_signed_in.*
 import kotlinx.android.synthetic.main.app_bar_signed_in.*
-import kotlinx.android.synthetic.main.nav_header_signed_in.*
 
 class SignedInActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, MainView {
 

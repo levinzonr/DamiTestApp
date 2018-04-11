@@ -1,4 +1,4 @@
-package cz.levinzonr.damiapp.view
+package cz.levinzonr.damiapp.view.map
 
 
 import android.os.Bundle

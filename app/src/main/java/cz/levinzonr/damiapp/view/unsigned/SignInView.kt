@@ -1,4 +1,4 @@
-package cz.levinzonr.damiapp.view.session
+package cz.levinzonr.damiapp.view.unsigned
 
 import cz.levinzonr.damiapp.model.entities.User
 

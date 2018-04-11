@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:layout_height="match_parent"
-    tools:context=".view.session.register.RegisterFragment">
+    tools:context=".view.unsigned.register.RegisterFragment">
 
 
     <TextView

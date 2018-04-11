@@ -2,7 +2,7 @@ package cz.levinzonr.damiapp.presenter.signin
 
 import cz.levinzonr.damiapp.model.Repository
 import cz.levinzonr.damiapp.presenter.Presenter
-import cz.levinzonr.damiapp.view.session.SignInView
+import cz.levinzonr.damiapp.view.unsigned.SignInView
 
 abstract class SingInPresenter : Presenter<SignInView> {
 

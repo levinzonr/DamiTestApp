@@ -1,4 +1,4 @@
-package cz.levinzonr.damiapp.view
+package cz.levinzonr.damiapp.view.unsigned
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,8 +10,9 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.ViewGroup
 import cz.levinzonr.damiapp.R
-import cz.levinzonr.damiapp.view.session.login.LoginFragment
-import cz.levinzonr.damiapp.view.session.BaseSignInFragment
+import cz.levinzonr.damiapp.view.map.MapsFragment
+import cz.levinzonr.damiapp.view.signed.SignedInActivity
+import cz.levinzonr.damiapp.view.unsigned.login.LoginFragment
 import kotlinx.android.synthetic.main.activity_not_signed.*
 
 class NotSignedActivity : AppCompatActivity(), BaseSignInFragment.SignInInteractionListener {
