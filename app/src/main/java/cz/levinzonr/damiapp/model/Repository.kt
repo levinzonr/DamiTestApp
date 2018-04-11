@@ -2,6 +2,7 @@ package cz.levinzonr.damiapp.model
 
 import android.content.Context
 import cz.levinzonr.damiapp.MyApp
+import cz.levinzonr.damiapp.model.entities.MapPoint
 import cz.levinzonr.damiapp.model.entities.User
 import cz.levinzonr.damiapp.model.local.DamiLocalDatasource
 import cz.levinzonr.damiapp.model.remote.DamiRemoteDatasource
@@ -29,6 +30,10 @@ class Repository {
 
     fun getCurrentUser() : Flowable<User> {
         return local.getCurrentUser()
+    }
+
+    fun getPointsOnMap() : Flowable<Response<ArrayList<MapPoint>>> {
+        return remote.getMapPoints()
     }
 
     fun logout() : Completable {

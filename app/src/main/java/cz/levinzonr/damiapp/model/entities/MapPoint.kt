@@ -18,7 +18,6 @@ class MapPoint(
         var lng: Double,
         var title: String,
         var desc: String,
-
         var photo: ArrayList<String>
 )
 

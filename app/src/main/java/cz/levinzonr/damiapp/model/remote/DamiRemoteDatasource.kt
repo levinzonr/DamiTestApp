@@ -3,6 +3,7 @@ package cz.levinzonr.damiapp.model.remote
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import cz.levinzonr.damiapp.model.entities.MapPoint
 import cz.levinzonr.damiapp.model.entities.User
 import io.reactivex.Flowable
 import retrofit2.Retrofit
@@ -36,6 +37,10 @@ class DamiRemoteDatasource {
         return service.register(user.email, user.password)
     }
 
+    fun getMapPoints() : Flowable<Response<ArrayList<MapPoint>>> {
+        return service.getMapPoints()
+    }
+
 
     interface DamiService {
         @FormUrlEncoded
@@ -45,6 +50,10 @@ class DamiRemoteDatasource {
         @FormUrlEncoded
         @POST("register")
         fun register(@Field("email") email:String, @Field("password") password: String) : Flowable<Response<User>>
+
+        @GET("getPointsOnMap")
+        fun getMapPoints() : Flowable<Response<ArrayList<MapPoint>>>
+
     }
 
 }
