@@ -20,6 +20,6 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_signed_in"
-        app:menu="@menu/activity_signed_in_drawer" />
+        app:menu="@menu/navigation_signed" />
 
 </android.support.v4.widget.DrawerLayout>
