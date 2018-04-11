@@ -9,7 +9,10 @@ import java.net.SocketTimeoutException
 
 class ErrorHandler {
 
-    inner class Error
+    inner class Error(
+            val responseCode: Int,
+            val responseCodeText: String
+    )
 
     fun handleError(e: Throwable) : String {
        return when {
@@ -22,8 +25,7 @@ class ErrorHandler {
     }
 
     private fun handleApiError(e: HttpException) : String {
-        val type = object : TypeToken<Response<Error>>() {}.javaClass
-        val response = Gson().fromJson<Response<Error>>(e.response().errorBody().string(), type)
+        val response = Gson().fromJson(e.response().errorBody().string(), Error::class.java)
         return response.responseCodeText
     }
 
