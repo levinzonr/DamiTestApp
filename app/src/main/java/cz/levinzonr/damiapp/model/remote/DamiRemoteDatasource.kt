@@ -3,6 +3,7 @@ package cz.levinzonr.damiapp.model.remote
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import cz.levinzonr.damiapp.model.entities.User
 import io.reactivex.Flowable
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -27,11 +28,11 @@ class DamiRemoteDatasource {
     }
 
 
-    fun userLogin(user : PostObject.Login) : Flowable<Response.OK> {
+    fun userLogin(user : PostObject.Login) : Flowable<Response<User>> {
         return service.login(user.email, user.password)
     }
 
-    fun userRegister(user: PostObject.Register) : Flowable<Response.OK> {
+    fun userRegister(user: PostObject.Register) : Flowable<Response<User>> {
         return service.register(user.email, user.password)
     }
 
@@ -39,11 +40,11 @@ class DamiRemoteDatasource {
     interface DamiService {
         @FormUrlEncoded
         @POST("login")
-        fun login(@Field("email" ) email:String, @Field("password") password: String) : Flowable<Response.OK>
+        fun login(@Field("email" ) email:String, @Field("password") password: String) : Flowable<Response<User>>
 
         @FormUrlEncoded
         @POST("register")
-        fun register(@Field("email") email:String, @Field("password") password: String) : Flowable<Response.OK>
+        fun register(@Field("email") email:String, @Field("password") password: String) : Flowable<Response<User>>
     }
 
 }

@@ -15,13 +15,13 @@ class Repository {
     private val remote = DamiRemoteDatasource()
 
 
-    fun login(user: PostObject.Login) : Flowable<Response.OK> {
+    fun login(user: PostObject.Login) : Flowable<Response<User>> {
         return remote.userLogin(user).flatMap {
             return@flatMap local.saveUser(it.response).toSingleDefault(it).toFlowable()
         }
     }
 
-    fun register(user: PostObject.Register) : Flowable<Response.OK> {
+    fun register(user: PostObject.Register) : Flowable<Response<User>> {
         return remote.userRegister(user).flatMap {
             return@flatMap local.saveUser(it.response).toSingleDefault(it).toFlowable()
         }

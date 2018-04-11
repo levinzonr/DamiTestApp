@@ -1,5 +1,6 @@
 package cz.levinzonr.damiapp.presenter.signin
 
+import cz.levinzonr.damiapp.model.entities.User
 import cz.levinzonr.damiapp.utils.ErrorHandler
 import cz.levinzonr.damiapp.model.remote.PostObject
 import cz.levinzonr.damiapp.model.remote.Response
@@ -21,7 +22,7 @@ class LoginPresenter: SingInPresenter(){
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { t: Response.OK? ->          Thread.sleep(1000)
+                        { t: Response<User>? ->          Thread.sleep(1000)
                             view?.onSignInFinished(t!!.response)},
                         {t: Throwable? ->         Thread.sleep(1000)
                              view?.onSignInError(ErrorHandler().handleError(t!!))
