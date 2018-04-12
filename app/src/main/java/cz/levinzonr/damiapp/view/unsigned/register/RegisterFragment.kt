@@ -15,6 +15,7 @@ import cz.levinzonr.damiapp.presenter.signin.RegisterPresenter
 import cz.levinzonr.damiapp.view.unsigned.BaseSignInFragment
 import cz.levinzonr.damiapp.view.unsigned.SignInView
 import kotlinx.android.synthetic.main.fragment_register.*
+import kotlinx.android.synthetic.main.hint_view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -76,8 +77,8 @@ class RegisterFragment : BaseSignInFragment() {
     override fun showHintMessage( status: SignInView.Status) {
         hint_view.visibility = View.VISIBLE
         when(status) {
-            SignInView.Status.EMPTY_FIELD -> hint_view.text = "Empty field"
-            SignInView.Status.PASSWORD_MISMATCH -> hint_view.text = "Mismatch"
+            SignInView.Status.EMPTY_FIELD -> hint_text.text = "Empty field"
+            SignInView.Status.PASSWORD_MISMATCH -> hint_text.text = "Mismatch"
         }
     }
 

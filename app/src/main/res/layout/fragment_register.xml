@@ -8,16 +8,12 @@
     tools:context=".view.unsigned.register.RegisterFragment">
 
 
-    <TextView
-        android:id="@+id/hint_view"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
-        tools:visibility="visible"
-        android:visibility="gone"
-        tools:text="@string/action_register"
+    <include
+        android:visibility="invisible"
+        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_gravity="center"
+        layout="@layout/hint_view"/>
 
     <android.support.design.widget.TextInputLayout
         android:layout_marginStart="20dp"
