@@ -25,7 +25,13 @@ class ContactsListPresenter : Presenter<ContactsListView> {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { t: Response<ArrayList<Contact>>? -> view?.onLoadingFinished(t!!.response)  },
+                        { t: Response<ArrayList<Contact>>? ->
+                            if (t != null) {
+                                if (t.response.isEmpty())
+                                    view?.onEmptyView()
+                                else
+                                    view?.onLoadingFinished(t.response)
+                            }},
                         { e: Throwable? -> view?.onLoadingError(ErrorHandler().handleError(e!!))}
                 ))
     }

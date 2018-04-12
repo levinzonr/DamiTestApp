@@ -5,4 +5,6 @@ import cz.levinzonr.damiapp.view.BaseView
 
 interface ContactsListView : BaseView<ArrayList<Contact>> {
 
+    fun onEmptyView()
+
 }
