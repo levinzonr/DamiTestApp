@@ -45,16 +45,16 @@ class MapsFragment : SupportMapFragment(), OnMapReadyCallback, MapView{
         map?.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
 
-    override fun onPointsLoaded(points: ArrayList<MapPoint>) {
+    override fun onLoadingFinished(result: ArrayList<MapPoint>) {
         Toast.makeText(context, "Loaded", Toast.LENGTH_SHORT).show()
 
     }
 
-    override fun onPointsLoadingStarted() {
+    override fun onLoadingStarted() {
         Toast.makeText(context, "Loadin started", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onPointsLoadingError(e: String) {
+    override fun onLoadingError(e: String) {
         Toast.makeText(context, "Loadin started", Toast.LENGTH_SHORT).show()
 
     }

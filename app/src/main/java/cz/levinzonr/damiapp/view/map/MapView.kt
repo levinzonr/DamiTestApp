@@ -1,12 +1,8 @@
 package cz.levinzonr.damiapp.view.map
 
 import cz.levinzonr.damiapp.model.entities.MapPoint
+import cz.levinzonr.damiapp.view.BaseView
 
-interface MapView {
+interface MapView : BaseView<ArrayList<MapPoint>> {
 
-    fun onPointsLoaded(points: ArrayList<MapPoint>)
-
-    fun onPointsLoadingStarted()
-
-    fun onPointsLoadingError(e: String)
 }
