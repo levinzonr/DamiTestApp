@@ -62,7 +62,6 @@ class DamiRemoteDatasource {
         @FormUrlEncoded
         @POST("getContacts")
         fun getContacts(@Field("token") token : String) : Flowable<Response<ArrayList<Contact>>>
-
     }
 
 }
