@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 
 import cz.levinzonr.damiapp.R
+import cz.levinzonr.damiapp.model.entities.User
+import kotlinx.android.synthetic.main.fragment_account_details.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,7 +20,19 @@ private const val ARG_PARAM2 = "param2"
  * A simple [Fragment] subclass.
  *
  */
-class AccountDetailsFragment : Fragment() {
+class AccountDetailsFragment : Fragment(), AccountDetailsView {
+
+
+    companion object {
+        const val TAG = "AccountDetailsFragment"
+
+        fun newInstance() : AccountDetailsFragment {
+            val fragment = AccountDetailsFragment()
+            fragment.arguments = Bundle()
+            return fragment
+        }
+
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -26,5 +40,16 @@ class AccountDetailsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_account_details, container, false)
     }
 
+    override fun onLoadingStarted() {
+    }
 
+    override fun onLoadingFinished(result: User) {
+        account_email.text = result.email
+        account_description.text = (result.description ?: getString(R.string.unknown))
+        account_name.text = (result.name ?: getString(R.string.unknown))
+        account_phone.text = (result.phone ?: getString(R.string.unknown))
+    }
+
+    override fun onLoadingError(error: String) {
+    }
 }

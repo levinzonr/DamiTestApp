@@ -15,6 +15,7 @@ import android.arch.persistence.room.Relation
          var description: String? = null,
          var rights: String,
          var photo: String? = null,
+         var phone: String? = null,
 
          @Ignore
          var favorites: List<MapPoint>,
@@ -28,7 +29,7 @@ import android.arch.persistence.room.Relation
         }
     }
 
-    constructor() : this(-1, "mail", null,null,null, "admin", null, ArrayList<MapPoint>(), "")
+    constructor() : this(-1, "mail", null,null,null, "admin", null,null, ArrayList<MapPoint>(), "")
 
     fun displayName() : String{
         return "$name $lastName"
