@@ -12,6 +12,7 @@ import cz.levinzonr.damiapp.model.remote.Response
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import org.intellij.lang.annotations.Flow
+import java.util.concurrent.TimeUnit
 
 class Repository {
     private val local = DamiLocalDatasource(MyApp.getContext())
@@ -51,7 +52,7 @@ class Repository {
     fun getContacts() : Flowable<Response<ArrayList<Contact>>> {
         //return remote.getContacts(local.getUserToken())
         val response = Response(1, "ok", MockContacts())
-        return Flowable.just(response)
+        return Flowable.just(response).delay(3, TimeUnit.SECONDS)
     }
 
     fun logout() : Completable {
