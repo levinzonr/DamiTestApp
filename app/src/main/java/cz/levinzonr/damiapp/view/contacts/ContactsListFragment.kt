@@ -1,8 +1,11 @@
 package cz.levinzonr.damiapp.view.contacts
 
 
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +14,7 @@ import android.widget.Toast
 import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.model.entities.Contact
 import cz.levinzonr.damiapp.presenter.ContactsListPresenter
+import kotlinx.android.synthetic.main.fragment_contacts_list.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,6 +28,7 @@ private const val ARG_PARAM2 = "param2"
 class ContactsListFragment : Fragment(), ContactsListView {
 
     private lateinit var presenter: ContactsListPresenter
+    private lateinit var contactsAdapter: ContactsListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -36,6 +41,13 @@ class ContactsListFragment : Fragment(), ContactsListView {
         presenter = ContactsListPresenter()
         presenter.attachView(this)
         presenter.getContacts()
+        contactsAdapter = ContactsListAdapter(presenter)
+        recycler_view.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = contactsAdapter
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        }
+
 
     }
 
@@ -45,10 +57,14 @@ class ContactsListFragment : Fragment(), ContactsListView {
 
     override fun onLoadingStarted() {
         Toast.makeText(context, "start", Toast.LENGTH_SHORT).show()
+        recycler_view.visibility = View.GONE
+        progress_bar.visibility = View.VISIBLE
     }
 
     override fun onLoadingFinished(result: ArrayList<Contact>) {
         Toast.makeText(context, "Done", Toast.LENGTH_SHORT).show()
+        progress_bar.visibility = View.GONE
+        recycler_view.visibility = View.VISIBLE
     }
 
     override fun onLoadingError(error: String) {
