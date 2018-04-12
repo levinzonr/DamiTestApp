@@ -17,6 +17,16 @@ class Repository {
     private val local = DamiLocalDatasource(MyApp.getContext())
     private val remote = DamiRemoteDatasource()
 
+    companion object {
+        fun MockContacts() : ArrayList<Contact> {
+            val list = ArrayList<Contact>()
+            for (i in 0..10) {
+                val contact = Contact(i,"emial$i@com", "John $i", "Doe", "Descpr", null)
+                list.add(contact)
+            }
+            return list
+        }
+    }
 
     fun login(user: PostObject.Login) : Flowable<Response<User>> {
         return remote.userLogin(user).flatMap {
@@ -39,7 +49,9 @@ class Repository {
     }
 
     fun getContacts() : Flowable<Response<ArrayList<Contact>>> {
-        return remote.getContacts(local.getUserToken())
+        //return remote.getContacts(local.getUserToken())
+        val response = Response(1, "ok", MockContacts())
+        return Flowable.just(response)
     }
 
     fun logout() : Completable {
