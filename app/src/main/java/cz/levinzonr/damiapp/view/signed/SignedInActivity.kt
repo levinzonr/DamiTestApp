@@ -15,6 +15,7 @@ import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.model.entities.User
 import cz.levinzonr.damiapp.model.local.DamiLocalDatasource
 import cz.levinzonr.damiapp.presenter.MainPresenter
+import cz.levinzonr.damiapp.view.account.AccountDetailsFragment
 import cz.levinzonr.damiapp.view.contacts.ContactsListFragment
 import cz.levinzonr.damiapp.view.map.MapsFragment
 import cz.levinzonr.damiapp.view.unsigned.NotSignedActivity
@@ -84,6 +85,11 @@ class SignedInActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             R.id.button_map -> {
                 replace(MapsFragment())
             }
+
+            R.id.button_account -> {
+                replace(AccountDetailsFragment.newInstance())
+            }
+
          }
 
         drawer_layout.closeDrawer(GravityCompat.START)

@@ -3,12 +3,14 @@ package cz.levinzonr.damiapp.view.account
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.model.entities.User
+import cz.levinzonr.damiapp.presenter.AccountDetailsPresenter
 import kotlinx.android.synthetic.main.fragment_account_details.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -22,6 +24,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class AccountDetailsFragment : Fragment(), AccountDetailsView {
 
+    private lateinit var presenter: AccountDetailsPresenter
 
     companion object {
         const val TAG = "AccountDetailsFragment"
@@ -40,7 +43,14 @@ class AccountDetailsFragment : Fragment(), AccountDetailsView {
         return inflater.inflate(R.layout.fragment_account_details, container, false)
     }
 
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        presenter = AccountDetailsPresenter()
+        presenter.attachView(this)
+    }
+
     override fun onLoadingStarted() {
+        Log.d(TAG, "Started")
     }
 
     override fun onLoadingFinished(result: User) {
@@ -51,5 +61,11 @@ class AccountDetailsFragment : Fragment(), AccountDetailsView {
     }
 
     override fun onLoadingError(error: String) {
+        Log.d(TAG, "Error: $error")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.detachView()
     }
 }
