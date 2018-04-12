@@ -21,12 +21,12 @@ class MapPresenter : Presenter<MapView>{
     }
 
     fun getPointsOnMap() {
-        view?.onPointsLoadingStarted()
+        view?.onLoadingStarted()
         cd.add(repository.getPointsOnMap()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({resp: Response<ArrayList<MapPoint>>? -> view?.onPointsLoaded(resp!!.response) },
-                        {error: Throwable? ->  view?.onPointsLoadingError(ErrorHandler().handleError(error!!))}
+                .subscribe({resp: Response<ArrayList<MapPoint>>? -> view?.onLoadingFinished(resp!!.response) },
+                        {error: Throwable? ->  view?.onLoadingError(ErrorHandler().handleError(error!!))}
 
                 ))
     }
