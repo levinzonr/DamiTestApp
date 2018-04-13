@@ -10,13 +10,12 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.TextView
-import com.google.android.gms.maps.MapFragment
 import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.model.entities.User
 import cz.levinzonr.damiapp.model.local.DamiLocalDatasource
 import cz.levinzonr.damiapp.presenter.MainPresenter
 import cz.levinzonr.damiapp.view.account.AccountDetailsFragment
-import cz.levinzonr.damiapp.view.contacts.ContactsListFragment
+import cz.levinzonr.damiapp.view.contacts.list.ContactsListFragment
 import cz.levinzonr.damiapp.view.map.MapsFragment
 import cz.levinzonr.damiapp.view.unsigned.NotSignedActivity
 import kotlinx.android.synthetic.main.activity_signed_in.*

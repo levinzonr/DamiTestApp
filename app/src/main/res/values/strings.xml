@@ -31,5 +31,6 @@
     <string name="action_logout_msg">Are you sure you want to logout?</string>
     <string name="title_activity_maps">Map</string>
     <string name="unknown">Unknown</string>
+    <string name="title_activity_edit_contact">EditContactActivity</string>
 
 </resources>

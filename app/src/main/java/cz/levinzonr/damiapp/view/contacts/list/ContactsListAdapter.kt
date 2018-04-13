@@ -1,4 +1,4 @@
-package cz.levinzonr.damiapp.view.contacts
+package cz.levinzonr.damiapp.view.contacts.list
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.item_contact.view.*
 class ContactsListAdapter(val presenter: ContactsListPresenter) :
         RecyclerView.Adapter<ContactsListAdapter.ViewHolder>(){
 
-    inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view), RecycledItemView{
+    inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view), RecycledItemView {
 
         override fun set(contact: Contact) {
             view.contact_name.text = "${contact.name} ${contact.lastname} "

@@ -46,7 +46,11 @@
 
         <activity
             android:name=".view.map.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".view.contacts.edit.EditContactActivity"
+            android:label="@string/title_activity_edit_contact"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
