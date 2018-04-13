@@ -50,6 +50,10 @@
         <activity
             android:name=".view.contacts.edit.EditContactActivity"
             android:label="@string/title_activity_edit_contact"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.contacts.detail.ContactDetailActivity"
+            android:label="@string/title_activity_contact_detail"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

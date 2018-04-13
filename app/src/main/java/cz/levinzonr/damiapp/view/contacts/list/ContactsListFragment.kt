@@ -13,6 +13,7 @@ import android.widget.Toast
 import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.model.entities.Contact
 import cz.levinzonr.damiapp.presenter.contacts.ContactsListPresenter
+import cz.levinzonr.damiapp.view.contacts.detail.ContactDetailActivity
 import cz.levinzonr.damiapp.view.contacts.edit.EditContactActivity
 import kotlinx.android.synthetic.main.fragment_contacts_list.*
 
@@ -52,6 +53,7 @@ class ContactsListFragment : Fragment(), ContactsListView, ContactsListAdapter.O
             EditContactActivity.startAsIntent(context, null)
         })
 
+
     }
 
     override fun onEmptyView() {
@@ -59,7 +61,7 @@ class ContactsListFragment : Fragment(), ContactsListView, ContactsListAdapter.O
     }
 
     override fun onItemSelected(contact: Contact) {
-        EditContactActivity.startAsIntent(context, contact.id)
+        ContactDetailActivity.startAsIntent(context, contact.id!!)
     }
 
     override fun onLoadingStarted() {
