@@ -25,7 +25,7 @@ private const val ARG_PARAM2 = "param2"
  * A simple [Fragment] subclass.
  *
  */
-class ContactsListFragment : Fragment(), ContactsListView {
+class ContactsListFragment : Fragment(), ContactsListView, ContactsListAdapter.OnItemClickListener{
 
     private lateinit var presenter: ContactsListPresenter
     private lateinit var contactsAdapter: ContactsListAdapter
@@ -41,7 +41,7 @@ class ContactsListFragment : Fragment(), ContactsListView {
         presenter = ContactsListPresenter()
         presenter.attachView(this)
         presenter.getContacts()
-        contactsAdapter = ContactsListAdapter(presenter)
+        contactsAdapter = ContactsListAdapter(presenter, this)
         recycler_view.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = contactsAdapter
@@ -56,6 +56,10 @@ class ContactsListFragment : Fragment(), ContactsListView {
 
     override fun onEmptyView() {
         Toast.makeText(context, "Empty", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onItemSelected(contact: Contact) {
+        EditContactActivity.startAsIntent(context, contact.id)
     }
 
     override fun onLoadingStarted() {
@@ -73,6 +77,8 @@ class ContactsListFragment : Fragment(), ContactsListView {
     override fun onLoadingError(error: String) {
         Toast.makeText(context, "Error $error", Toast.LENGTH_SHORT).show()
     }
+
+
 
     override fun onDestroy() {
         super.onDestroy()

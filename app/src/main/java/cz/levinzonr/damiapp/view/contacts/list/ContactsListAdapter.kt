@@ -9,13 +9,20 @@ import cz.levinzonr.damiapp.model.entities.Contact
 import cz.levinzonr.damiapp.presenter.ContactsListPresenter
 import kotlinx.android.synthetic.main.item_contact.view.*
 
-class ContactsListAdapter(val presenter: ContactsListPresenter) :
+class ContactsListAdapter(val presenter: ContactsListPresenter, val listener: OnItemClickListener ) :
         RecyclerView.Adapter<ContactsListAdapter.ViewHolder>(){
+
+    interface OnItemClickListener {
+        fun onItemSelected(contact: Contact)
+    }
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view), RecycledItemView {
 
         override fun set(contact: Contact) {
             view.contact_name.text = "${contact.name} ${contact.lastname} "
+            view.setOnClickListener({
+                listener.onItemSelected(contact)
+            })
         }
     }
 
