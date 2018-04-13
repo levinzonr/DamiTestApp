@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.model.entities.Contact
-import cz.levinzonr.damiapp.presenter.ContactsListPresenter
+import cz.levinzonr.damiapp.presenter.contacts.ContactsListPresenter
 import kotlinx.android.synthetic.main.item_contact.view.*
 
 class ContactsListAdapter(val presenter: ContactsListPresenter, val listener: OnItemClickListener ) :

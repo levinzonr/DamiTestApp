@@ -1,8 +1,9 @@
-package cz.levinzonr.damiapp.presenter
+package cz.levinzonr.damiapp.presenter.contacts
 
 import cz.levinzonr.damiapp.model.Repository
 import cz.levinzonr.damiapp.model.entities.Contact
 import cz.levinzonr.damiapp.model.remote.Response
+import cz.levinzonr.damiapp.presenter.Presenter
 import cz.levinzonr.damiapp.view.contacts.edit.ContactEditView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

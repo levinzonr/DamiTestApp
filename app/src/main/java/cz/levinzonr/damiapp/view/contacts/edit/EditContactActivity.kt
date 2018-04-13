@@ -3,12 +3,10 @@ package cz.levinzonr.damiapp.view.contacts.edit
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.model.entities.Contact
-import cz.levinzonr.damiapp.presenter.ContactEditPresenter
-import cz.levinzonr.damiapp.presenter.Presenter
+import cz.levinzonr.damiapp.presenter.contacts.ContactEditPresenter
 
 import kotlinx.android.synthetic.main.activity_edit_contact.*
 

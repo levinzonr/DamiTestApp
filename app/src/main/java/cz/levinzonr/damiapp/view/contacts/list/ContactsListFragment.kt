@@ -12,7 +12,7 @@ import android.widget.Toast
 
 import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.model.entities.Contact
-import cz.levinzonr.damiapp.presenter.ContactsListPresenter
+import cz.levinzonr.damiapp.presenter.contacts.ContactsListPresenter
 import cz.levinzonr.damiapp.view.contacts.edit.EditContactActivity
 import kotlinx.android.synthetic.main.fragment_contacts_list.*
 
