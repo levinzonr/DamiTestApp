@@ -3,6 +3,7 @@ package cz.levinzonr.damiapp.model.remote
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.model.entities.Contact
 import cz.levinzonr.damiapp.model.entities.MapPoint
 import cz.levinzonr.damiapp.model.entities.User
@@ -52,6 +53,11 @@ class DamiRemoteDatasource {
                 contact.name, contact.email,"", contact.lastname, contact.description)
     }
 
+    fun updateContact(token: String, contact: Contact) : Flowable<Response<Contact>> {
+        return service.updateContact(token, contact.id!!, contact.name, contact.email,"",
+                contact.lastname, contact.description)
+    }
+
     interface DamiService {
         @FormUrlEncoded
         @POST("login")
@@ -72,6 +78,17 @@ class DamiRemoteDatasource {
         @POST("addContact")
         fun addContact(
                 @Field("token") token: String,
+                @Field("name") name: String,
+                @Field("email") email: String,
+                @Field("phone") phone: String,
+                @Field("lastname") lastname: String,
+                @Field("description") desc: String) : Flowable<Response<Contact>>
+
+        @FormUrlEncoded
+        @POST("addContact")
+        fun updateContact(
+                @Field("token") token: String,
+                @Field("id") id: Int,
                 @Field("name") name: String,
                 @Field("email") email: String,
                 @Field("phone") phone: String,
