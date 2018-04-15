@@ -64,4 +64,9 @@ class Repository {
         return Completable.fromCallable { local.logout() }
     }
 
+    fun updateContact(contact: Contact) : Flowable<Response<Contact>> {
+        return if (contact.id == null) remote.updateContact(local.getUserToken(), contact)
+        else remote.addContact(local.getUserToken(), contact)
+    }
+
 }
