@@ -7,6 +7,7 @@ import cz.levinzonr.damiapp.model.entities.Contact
 import cz.levinzonr.damiapp.model.entities.MapPoint
 import cz.levinzonr.damiapp.model.entities.User
 import io.reactivex.Flowable
+import org.intellij.lang.annotations.Flow
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
@@ -46,6 +47,10 @@ class DamiRemoteDatasource {
         return service.getContacts(token)
     }
 
+    fun addContact(token: String, contact: Contact) : Flowable<Response<Contact>> {
+        return service.addContact(token,
+                contact.name, contact.email,"", contact.lastname, contact.description)
+    }
 
     interface DamiService {
         @FormUrlEncoded
@@ -62,6 +67,17 @@ class DamiRemoteDatasource {
         @FormUrlEncoded
         @POST("getContacts")
         fun getContacts(@Field("token") token : String) : Flowable<Response<ArrayList<Contact>>>
+
+        @FormUrlEncoded
+        @POST("addContact")
+        fun addContact(
+                @Field("token") token: String,
+                @Field("name") name: String,
+                @Field("email") email: String,
+                @Field("phone") phone: String,
+                @Field("lastname") lastname: String,
+                @Field("description") desc: String) : Flowable<Response<Contact>>
+
     }
 
 }
