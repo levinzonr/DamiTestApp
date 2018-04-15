@@ -57,7 +57,7 @@ class Repository {
 
     fun getContactById(id: Int) : Flowable<Response<Contact>>{
         val response = Response(1, "ok", MockContacts()[id])
-        return Flowable.just(response).delay(2, TimeUnit.SECONDS)
+        return Flowable.just(response)
     }
 
     fun logout() : Completable {

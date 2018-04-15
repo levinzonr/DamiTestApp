@@ -23,7 +23,7 @@ class ContactEditPresenter : Presenter<ContactEditView> {
 
     fun setContactId(id: Int) {
         if (id == -1) {
-            view?.onContactCreate()
+            view?.onNewContact()
             contact = Contact()
         } else {
             getContactById(id)
@@ -41,10 +41,12 @@ class ContactEditPresenter : Presenter<ContactEditView> {
 
     fun setName(text: String) {
         contact.name = text
+        validate()
     }
 
     fun setEmail(text: String) {
         contact.email = text
+        validate()
     }
 
     fun setPhone(text: String) {
@@ -53,6 +55,14 @@ class ContactEditPresenter : Presenter<ContactEditView> {
 
     fun setLastname(text: String) {
         contact.lastname = text
+    }
+
+    private fun validate() {
+        if (contact.email.isEmpty()) {
+            view?.showInputHint(false, ContactEditView.STATUS.MAIL_EMPTY)
+        } else {
+            view?.hideInputHint()   
+        }
     }
 
     override fun detachView() {

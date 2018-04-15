@@ -6,14 +6,12 @@ import cz.levinzonr.damiapp.view.BaseView
 interface ContactEditView : BaseView<Contact> {
 
     enum class STATUS {
-        MAIL_EMPTY, MAIL_INVALID
+        MAIL_EMPTY, MAIL_INVALID, OK
     }
 
-    fun onContactCreate()
+    fun onNewContact()
 
-    fun setInputOk(valid: Boolean)
-
-    fun showInputHint(status: STATUS)
+    fun showInputHint(show: Boolean, status: STATUS)
 
     fun hideInputHint()
 

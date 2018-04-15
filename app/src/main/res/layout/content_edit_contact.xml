@@ -6,17 +6,30 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".view.contacts.edit.EditContactActivity"
+    tools:layout_editor_absoluteY="81dp"
     tools:showIn="@layout/activity_edit_contact">
+
+    <include
+        android:id="@+id/hint_view"
+        layout="@layout/hint_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/contact_image"
         android:layout_width="118dp"
-        android:layout_height="118dp"
+        android:layout_height="114dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:src="@mipmap/ic_launcher"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/hint_view" />
 
     <EditText
         android:id="@+id/contact_input_name"
@@ -24,12 +37,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:hint="@string/hint_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@id/contact_image"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/contact_image"
+        app:layout_constraintTop_toBottomOf="@+id/hint_view" />
 
     <EditText
         android:id="@+id/contact_input_lastname"
@@ -40,37 +52,32 @@
         android:layout_marginTop="16dp"
         android:hint="@string/hint_lastname"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/contact_image"
-        app:layout_constraintTop_toBottomOf="@id/contact_input_name" />
+        app:layout_constraintTop_toBottomOf="@+id/contact_input_name" />
 
     <EditText
         android:id="@+id/contact_input_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:hint="@string/hint_email"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contact_image" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contact_input_lastname" />
 
     <EditText
         android:id="@+id/contact_input_phone"
         android:layout_width="0dp"
-        android:layout_height="44dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:hint="@string/hint_phone"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contact_input_email"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/contact_input_email" />
 
 
 </android.support.constraint.ConstraintLayout>

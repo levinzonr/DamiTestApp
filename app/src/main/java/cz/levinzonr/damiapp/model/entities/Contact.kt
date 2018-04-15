@@ -7,9 +7,9 @@ import android.arch.persistence.room.PrimaryKey
 class Contact(
         @PrimaryKey
         var id: Int? = null,
-        var email: String? = null,
-        var name: String? = null,
-        var lastname: String? = null,
-        var description: String? = null,
+        var email: String = "",
+        var name: String = "",
+        var lastname: String = "",
+        var description: String = "",
         var photo: String? = null
 )
