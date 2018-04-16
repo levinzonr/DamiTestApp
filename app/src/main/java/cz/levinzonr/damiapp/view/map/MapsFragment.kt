@@ -1,6 +1,7 @@
 package cz.levinzonr.damiapp.view.map
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -16,6 +17,7 @@ import cz.levinzonr.damiapp.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import cz.levinzonr.damiapp.model.entities.MapPoint
 import cz.levinzonr.damiapp.presenter.MapPresenter
 
@@ -39,6 +41,10 @@ class MapsFragment : SupportMapFragment(), OnMapReadyCallback, MapView{
         if (map != null) {
             this.map = map
             this.map.setInfoWindowAdapter(MarkerInfoAdapter(context))
+            this.map.setOnInfoWindowClickListener {
+                val point = it.tag as MapPoint
+                PointDetailActivity.startAsIntent(context, point)
+            }
             presenter.getPointsOnMap()
             Log.d(TAG, "Map loaded")
         }
@@ -51,11 +57,13 @@ class MapsFragment : SupportMapFragment(), OnMapReadyCallback, MapView{
             val marker = MarkerOptions()
                     .position(pos)
                     .title(point.title)
-           map.addMarker(marker).tag = point.photo.first()
+           map.addMarker(marker).tag = point
 
         }
         map.moveCamera(CameraUpdateFactory.newLatLng(LatLng(result.last().lat, result.last().lng)))
     }
+
+
 
     override fun onLoadingStarted() {
         Toast.makeText(context, "Loadin started", Toast.LENGTH_SHORT).show()
@@ -65,6 +73,8 @@ class MapsFragment : SupportMapFragment(), OnMapReadyCallback, MapView{
         Toast.makeText(context, "Loadin error: $e", Toast.LENGTH_SHORT).show()
 
     }
+
+
 
     override fun onDestroy() {
         super.onDestroy()

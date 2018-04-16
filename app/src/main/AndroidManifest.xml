@@ -54,6 +54,10 @@
         <activity
             android:name=".view.contacts.detail.ContactDetailActivity"
             android:label="@string/title_activity_contact_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.map.PointDetailActivity"
+            android:label="@string/title_activity_point_detail"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
