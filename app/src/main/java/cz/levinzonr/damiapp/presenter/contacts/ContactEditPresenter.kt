@@ -1,9 +1,11 @@
 package cz.levinzonr.damiapp.presenter.contacts
 
+import android.util.Log
 import cz.levinzonr.damiapp.model.Repository
 import cz.levinzonr.damiapp.model.entities.Contact
 import cz.levinzonr.damiapp.model.remote.Response
 import cz.levinzonr.damiapp.presenter.Presenter
+import cz.levinzonr.damiapp.utils.ErrorHandler
 import cz.levinzonr.damiapp.view.contacts.edit.ContactEditView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -34,9 +36,21 @@ class ContactEditPresenter : Presenter<ContactEditView> {
         cd.add(repository.getContactById(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({t: Response<Contact>? ->
-                    contact = t!!.response
-                    view?.onLoadingFinished(t.response) }))
+                .subscribe({t: Contact? ->
+                    contact = t!!
+                    view?.onLoadingFinished(t) }))
+    }
+
+
+    fun postContact() {
+        Log.d("CONTACT", "cont: ${contact.id}")
+        cd.add(repository.updateContact(contact)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        {contact: Response<Contact>? -> view?.onChangesLoaded()},
+                        {e: Throwable? -> view?.onChangesError(ErrorHandler().handleError(e!!))}
+                ))
     }
 
     fun setName(text: String) {
@@ -58,7 +72,7 @@ class ContactEditPresenter : Presenter<ContactEditView> {
     }
 
     private fun validate() {
-        if (contact.email.isEmpty()) {
+        if (contact.email!!.isEmpty()) {
             view?.showInputHint(false, ContactEditView.STATUS.MAIL_EMPTY)
         } else {
             view?.hideInputHint()   

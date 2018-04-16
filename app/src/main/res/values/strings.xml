@@ -36,5 +36,6 @@
     <string name="hint_lastname">Lastname</string>
     <string name="hint_phone">Phone</string>
     <string name="title_activity_contact_detail">Contact</string>
+    <string name="action_save">Save</string>
 
 </resources>

@@ -15,4 +15,8 @@ interface ContactEditView : BaseView<Contact> {
 
     fun hideInputHint()
 
+    fun onChangesLoaded()
+
+    fun onChangesError(e: String)
+
 }

@@ -4,7 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.extensions.EditTextListener
 import cz.levinzonr.damiapp.model.entities.Contact
@@ -70,12 +73,35 @@ class EditContactActivity : AppCompatActivity(), ContactEditView {
         contact_input_name.setText(result.name)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.edit_contact_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+       return when(item?.itemId) {
+            R.id.button_post -> {
+                presenter.postContact()
+                true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun onLoadingError(error: String) {
     }
 
     override fun onDestroy() {
         super.onDestroy()
         presenter.detachView()
+    }
+
+    override fun onChangesLoaded() {
+        Toast.makeText(this, "Changes uploaded", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onChangesError(e: String) {
+        Toast.makeText(this, "Changes faiked: $e", Toast.LENGTH_SHORT).show()
     }
 
 }
