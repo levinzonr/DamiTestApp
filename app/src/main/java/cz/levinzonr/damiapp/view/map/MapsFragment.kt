@@ -55,7 +55,7 @@ class MapsFragment : SupportMapFragment(), OnMapReadyCallback, MapView{
     }
 
     override fun onLoadingError(e: String) {
-        Toast.makeText(context, "Loadin started", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Loadin error: $e", Toast.LENGTH_SHORT).show()
 
     }
 

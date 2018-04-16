@@ -17,7 +17,7 @@ class MapPresenter : Presenter<MapView>{
 
     override fun attachView(view: MapView) {
        this.view = view
-        getPointsOnMap()
+        getUserPoints()
     }
 
     fun getPointsOnMap() {
@@ -29,6 +29,22 @@ class MapPresenter : Presenter<MapView>{
                         {error: Throwable? ->  view?.onLoadingError(ErrorHandler().handleError(error!!))}
 
                 ))
+    }
+
+    fun getUserPoints() {
+        if (repository.isLoggedIn()) {
+            view?.onLoadingStarted()
+            cd.add(repository.getFavoritePoints()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({resp: List<MapPoint>? -> view?.onLoadingFinished(ArrayList(resp)) },
+                            {error: Throwable? ->  view?.onLoadingError(ErrorHandler().handleError(error!!))}
+
+                    ))
+        } else {
+            view?.onLoadingError("Not Logged in")
+        }
+
     }
 
     override fun detachView() {

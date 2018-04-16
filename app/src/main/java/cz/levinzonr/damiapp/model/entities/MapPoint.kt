@@ -13,7 +13,7 @@ import kotlin.collections.ArrayList
 class MapPoint(
         @PrimaryKey
         var id: Int,
-        var userId: Int,
+        var userId: Int? = null,
         var lat: Double,
         var lng: Double,
         var title: String,

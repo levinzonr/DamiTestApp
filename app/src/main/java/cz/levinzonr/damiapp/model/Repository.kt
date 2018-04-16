@@ -1,7 +1,5 @@
 package cz.levinzonr.damiapp.model
 
-import android.content.Context
-import android.util.Log
 import cz.levinzonr.damiapp.MyApp
 import cz.levinzonr.damiapp.model.entities.Contact
 import cz.levinzonr.damiapp.model.entities.MapPoint
@@ -12,8 +10,6 @@ import cz.levinzonr.damiapp.model.remote.PostObject
 import cz.levinzonr.damiapp.model.remote.Response
 import io.reactivex.Completable
 import io.reactivex.Flowable
-import org.intellij.lang.annotations.Flow
-import java.util.concurrent.TimeUnit
 
 class Repository {
     private val local = DamiLocalDatasource(MyApp.getContext())
@@ -32,22 +28,30 @@ class Repository {
 
     fun login(user: PostObject.Login) : Flowable<Response<User>> {
         return remote.userLogin(user).flatMap {
-            return@flatMap local.saveUser(it.response).toSingleDefault(it).toFlowable()
+            return@flatMap local.afterLogin(it.response).toSingleDefault(it).toFlowable()
         }
     }
 
     fun register(user: PostObject.Register) : Flowable<Response<User>> {
         return remote.userRegister(user).flatMap {
-            return@flatMap local.saveUser(it.response).toSingleDefault(it).toFlowable()
+            return@flatMap local.afterLogin(it.response).toSingleDefault(it).toFlowable()
         }
     }
+
+    fun isLoggedIn() : Boolean = local.isLoggedIn()
 
     fun getCurrentUser() : Flowable<User> {
         return local.getCurrentUser()
     }
 
     fun getPointsOnMap() : Flowable<Response<ArrayList<MapPoint>>> {
-        return remote.getMapPoints()
+        return remote.getMapPoints().flatMap {
+            return@flatMap local.saveMapPoints(it.response).toSingleDefault(it).toFlowable()
+        }
+    }
+
+    fun getFavoritePoints() : Flowable<List<MapPoint>> {
+        return local.getUserMapPoints()
     }
 
     fun updateContacts() : Flowable<Response<ArrayList<Contact>>> {
