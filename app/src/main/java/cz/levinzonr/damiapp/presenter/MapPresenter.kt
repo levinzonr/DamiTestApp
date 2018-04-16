@@ -17,7 +17,6 @@ class MapPresenter : Presenter<MapView>{
 
     override fun attachView(view: MapView) {
        this.view = view
-        getUserPoints()
     }
 
     fun getPointsOnMap() {

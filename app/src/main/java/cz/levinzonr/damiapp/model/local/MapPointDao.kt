@@ -2,6 +2,7 @@ package cz.levinzonr.damiapp.model.local
 
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
+import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import cz.levinzonr.damiapp.model.entities.MapPoint
 import io.reactivex.Flowable
@@ -9,10 +10,10 @@ import io.reactivex.Flowable
 @Dao
 interface MapPointDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(point: MapPoint)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(points: List<MapPoint>)
 
     @Query("SELECT * FROM mappoint WHERE userId LIKE :userId")

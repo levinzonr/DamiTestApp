@@ -30,24 +30,31 @@ class MapsFragment : SupportMapFragment(), OnMapReadyCallback, MapView{
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getMapAsync(this)
         presenter = MapPresenter()
         presenter.attachView(this)
+        getMapAsync(this)
     }
 
     override fun onMapReady(map: GoogleMap?) {
         if (map != null) {
             this.map = map
+            this.map.setInfoWindowAdapter(MarkerInfoAdapter(context))
+            presenter.getPointsOnMap()
             Log.d(TAG, "Map loaded")
         }
-        val sydney = LatLng(-34.0, 151.0)
-        map?.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        map?.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
 
     override fun onLoadingFinished(result: ArrayList<MapPoint>) {
-        Toast.makeText(context, "Loaded", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Loaded ${result.size}" , Toast.LENGTH_SHORT).show()
+        for (point in result) {
+            val pos = LatLng(point.lat, point.lng)
+            val marker = MarkerOptions()
+                    .position(pos)
+                    .title(point.title)
+           map.addMarker(marker).tag = point.photo.first()
 
+        }
+        map.moveCamera(CameraUpdateFactory.newLatLng(LatLng(result.last().lat, result.last().lng)))
     }
 
     override fun onLoadingStarted() {
