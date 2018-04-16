@@ -50,14 +50,13 @@ class Repository {
     }
 
     fun getContacts() : Flowable<Response<ArrayList<Contact>>> {
-        //return remote.getContacts(local.getUserToken())
-        val response = Response(1, "ok", MockContacts())
-        return Flowable.just(response).delay(3, TimeUnit.SECONDS)
+        return  remote.getContacts(local.getUserToken()).flatMap {
+            return@flatMap local.saveContacts(it.response).toSingleDefault(it).toFlowable()
+        }
     }
 
-    fun getContactById(id: Int) : Flowable<Response<Contact>>{
-        val response = Response(1, "ok", MockContacts()[id])
-        return Flowable.just(response)
+    fun getContactById(id: Int) : Flowable<Contact>{
+        return local.getContactById(id)
     }
 
     fun logout() : Completable {
@@ -65,8 +64,8 @@ class Repository {
     }
 
     fun updateContact(contact: Contact) : Flowable<Response<Contact>> {
-        return if (contact.id == null) remote.updateContact(local.getUserToken(), contact)
-        else remote.addContact(local.getUserToken(), contact)
+        return if (contact.id == null) remote.addContact(local.getUserToken(), contact)
+        else remote.updateContact(local.getUserToken(), contact)
     }
 
 }

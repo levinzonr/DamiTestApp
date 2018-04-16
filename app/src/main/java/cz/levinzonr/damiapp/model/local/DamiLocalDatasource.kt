@@ -2,9 +2,11 @@ package cz.levinzonr.damiapp.model.local
 
 import android.app.Application
 import android.content.Context
+import cz.levinzonr.damiapp.model.entities.Contact
 import cz.levinzonr.damiapp.model.entities.User
 import io.reactivex.Completable
 import io.reactivex.Flowable
+import org.intellij.lang.annotations.Flow
 
 class DamiLocalDatasource(application: Context) {
     private val db = AppDatabase.getInstance(application)
@@ -15,6 +17,20 @@ class DamiLocalDatasource(application: Context) {
         return  Completable.fromCallable {
             prefs.saveLoggedInUser(user)
             db.userDao().insert(user) }
+    }
+
+    fun saveContacts(arrayList: ArrayList<Contact>) : Completable {
+        return Completable.fromCallable {
+            db.contactsDao().insertAll(arrayList)
+        }
+    }
+
+    fun getContactById(id: Int) : Flowable<Contact> {
+        return db.contactsDao().findById(id)
+    }
+
+    fun getContacts() : Flowable<List<Contact>> {
+        return db.contactsDao().findAll()
     }
 
     fun isLoggedIn() : Boolean {

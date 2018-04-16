@@ -78,22 +78,22 @@ class DamiRemoteDatasource {
         @POST("addContact")
         fun addContact(
                 @Field("token") token: String,
-                @Field("name") name: String,
-                @Field("email") email: String,
-                @Field("phone") phone: String,
-                @Field("lastname") lastname: String,
-                @Field("description") desc: String) : Flowable<Response<Contact>>
+                @Field("name") name: String?,
+                @Field("email") email: String?,
+                @Field("phone") phone: String?,
+                @Field("lastname") lastname: String?,
+                @Field("description") desc: String?) : Flowable<Response<Contact>>
 
         @FormUrlEncoded
-        @POST("addContact")
+        @POST("updateContact")
         fun updateContact(
                 @Field("token") token: String,
                 @Field("id") id: Int,
-                @Field("name") name: String,
-                @Field("email") email: String,
-                @Field("phone") phone: String,
-                @Field("lastname") lastname: String,
-                @Field("description") desc: String) : Flowable<Response<Contact>>
+                @Field("name") name: String?,
+                @Field("email") email: String?,
+                @Field("phone") phone: String?,
+                @Field("lastname") lastname: String?,
+                @Field("description") desc: String?) : Flowable<Response<Contact>>
 
     }
 

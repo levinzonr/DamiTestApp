@@ -31,4 +31,6 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun mapPointDao() : MapPointDao
 
+    abstract fun contactsDao() : ContactDao
+
 }
