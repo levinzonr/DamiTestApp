@@ -3,6 +3,7 @@ package cz.levinzonr.damiapp.model.local
 import android.app.Application
 import android.arch.persistence.room.*
 import android.content.Context
+import android.util.Log
 import cz.levinzonr.damiapp.model.entities.Contact
 import cz.levinzonr.damiapp.model.entities.Converters
 import cz.levinzonr.damiapp.model.entities.MapPoint

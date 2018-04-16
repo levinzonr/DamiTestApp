@@ -1,5 +1,6 @@
 package cz.levinzonr.damiapp.presenter.contacts
 
+import android.util.Log
 import cz.levinzonr.damiapp.model.Repository
 import cz.levinzonr.damiapp.model.entities.Contact
 import cz.levinzonr.damiapp.model.remote.Response
@@ -21,6 +22,16 @@ class ContactsListPresenter : Presenter<ContactsListView> {
 
     override fun attachView(view: ContactsListView) {
         this.view = view
+    //    updateContacts()
+
+    }
+
+    fun updateContacts() {
+       cd.add(repository.updateContacts()
+               .observeOn(AndroidSchedulers.mainThread())
+               .subscribeOn(Schedulers.io())
+               .subscribe())
+
     }
 
     fun getContacts() {
@@ -29,13 +40,13 @@ class ContactsListPresenter : Presenter<ContactsListView> {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { t: Response<ArrayList<Contact>>? ->
+                        { t: List<Contact>? ->
                             if (t != null) {
-                                items = t.response
-                                if (t.response.isEmpty())
+                                items = ArrayList(t)
+                                if (t.isEmpty())
                                     view?.onEmptyView()
                                 else
-                                    view?.onLoadingFinished(t.response)
+                                    view?.onLoadingFinished(ArrayList(t))
                             }},
                         { e: Throwable? -> view?.onLoadingError(ErrorHandler().handleError(e!!))}
                 ))

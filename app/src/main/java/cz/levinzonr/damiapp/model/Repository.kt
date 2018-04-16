@@ -1,6 +1,7 @@
 package cz.levinzonr.damiapp.model
 
 import android.content.Context
+import android.util.Log
 import cz.levinzonr.damiapp.MyApp
 import cz.levinzonr.damiapp.model.entities.Contact
 import cz.levinzonr.damiapp.model.entities.MapPoint
@@ -49,12 +50,16 @@ class Repository {
         return remote.getMapPoints()
     }
 
-    fun getContacts() : Flowable<Response<ArrayList<Contact>>> {
+    fun updateContacts() : Flowable<Response<ArrayList<Contact>>> {
         return  remote.getContacts(local.getUserToken()).flatMap {
             return@flatMap local.saveContacts(it.response).toSingleDefault(it).toFlowable()
         }
     }
 
+
+    fun getContacts() : Flowable<List<Contact>> {
+        return local.getContacts()
+    }
     fun getContactById(id: Int) : Flowable<Contact>{
         return local.getContactById(id)
     }
@@ -64,7 +69,11 @@ class Repository {
     }
 
     fun updateContact(contact: Contact) : Flowable<Response<Contact>> {
-        return if (contact.id == null) remote.addContact(local.getUserToken(), contact)
+        return if (contact.id == null) {
+            remote.addContact(local.getUserToken(), contact).flatMap {
+                return@flatMap local.saveContact(it.response).toSingleDefault(it).toFlowable()
+            }
+        }
         else remote.updateContact(local.getUserToken(), contact)
     }
 

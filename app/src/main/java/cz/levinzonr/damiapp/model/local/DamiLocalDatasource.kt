@@ -2,6 +2,7 @@ package cz.levinzonr.damiapp.model.local
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import cz.levinzonr.damiapp.model.entities.Contact
 import cz.levinzonr.damiapp.model.entities.User
 import io.reactivex.Completable
@@ -22,6 +23,12 @@ class DamiLocalDatasource(application: Context) {
     fun saveContacts(arrayList: ArrayList<Contact>) : Completable {
         return Completable.fromCallable {
             db.contactsDao().insertAll(arrayList)
+        }
+    }
+
+    fun saveContact(contact: Contact) : Completable{
+        return Completable.fromCallable {
+            db.contactsDao().insert(contact)
         }
     }
 
