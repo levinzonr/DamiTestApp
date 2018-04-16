@@ -4,7 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.model.entities.Contact
@@ -43,8 +46,30 @@ class ContactDetailActivity : AppCompatActivity(), ContactDetailView {
         }
     }
 
-    override fun onContactDeleted() {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_contact_detail, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when(item?.itemId) {
+            R.id.button_delete -> {
+                val d = AlertDialog.Builder(this)
+                        .setTitle(R.string.title_contact_delete)
+                        .setMessage(R.string.contact_delete_message)
+                        .setNegativeButton(android.R.string.no, {_, _ ->})
+                        .setPositiveButton(android.R.string.yes, {_, _ -> presenter.deleteContact()})
+                        .create()
+                d.show()
+                true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onContactDeleted() {
+        Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show()
+        onBackPressed()
     }
 
     override fun onLoadingStarted() {

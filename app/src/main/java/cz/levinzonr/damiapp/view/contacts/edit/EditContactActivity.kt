@@ -74,7 +74,7 @@ class EditContactActivity : AppCompatActivity(), ContactEditView {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.edit_contact_menu, menu)
+        menuInflater.inflate(R.menu.menu_contact_edit, menu)
         return super.onCreateOptionsMenu(menu)
     }
 

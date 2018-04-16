@@ -35,7 +35,7 @@ class ContactDetailPresenter : Presenter<ContactDetailView> {
 
     fun deleteContact() {
         if (contactId != -1) {
-           // cd.add(repository.deleteContact())
+            view?.onContactDeleted()
         }
     }
 
