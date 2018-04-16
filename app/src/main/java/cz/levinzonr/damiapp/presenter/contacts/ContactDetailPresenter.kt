@@ -40,7 +40,7 @@ class ContactDetailPresenter : Presenter<ContactDetailView> {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             {t -> view?.onContactDeleted() },
-                            {t: Throwable? ->  ErrorHandler().handleError(t!!) }
+                            {t: Throwable? ->  view?.onLoadingError(ErrorHandler().handleError(t!!)) }
                     ))
         }
     }
