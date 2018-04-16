@@ -77,4 +77,10 @@ class Repository {
         else remote.updateContact(local.getUserToken(), contact)
     }
 
+    fun deleteContact(id: Int) : Flowable<Response<Any>> {
+        return remote.deleteContact(local.getUserToken(), id).flatMap {
+            return@flatMap local.deleteContactById(id).toSingleDefault(it).toFlowable()
+        }
+    }
+
 }

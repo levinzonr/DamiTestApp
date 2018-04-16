@@ -22,4 +22,7 @@ interface ContactDao {
     @Update
     fun update(contact:Contact)
 
+    @Query("DELETE from contact where id LIKE :id")
+    fun deleteById(id: Int)
+
 }

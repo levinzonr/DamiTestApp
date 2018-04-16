@@ -58,6 +58,10 @@ class DamiRemoteDatasource {
                 contact.lastname, contact.description)
     }
 
+    fun deleteContact(token: String, id: Int) : Flowable<Response<Any>> {
+        return service.deleteContact(token, id)
+    }
+
     interface DamiService {
         @FormUrlEncoded
         @POST("login")
@@ -94,6 +98,13 @@ class DamiRemoteDatasource {
                 @Field("phone") phone: String?,
                 @Field("lastname") lastname: String?,
                 @Field("description") desc: String?) : Flowable<Response<Contact>>
+
+
+        @FormUrlEncoded
+        @POST("deleteContact")
+        fun deleteContact(@Field("token") token: String,
+                          @Field("id") contactId: Int) : Flowable<Response<Any>>
+
 
     }
 

@@ -35,7 +35,13 @@ class ContactDetailPresenter : Presenter<ContactDetailView> {
 
     fun deleteContact() {
         if (contactId != -1) {
-            view?.onContactDeleted()
+            cd.add(repository.deleteContact(contactId)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                            {t -> view?.onContactDeleted() },
+                            {t: Throwable? ->  ErrorHandler().handleError(t!!) }
+                    ))
         }
     }
 

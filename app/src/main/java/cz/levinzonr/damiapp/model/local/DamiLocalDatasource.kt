@@ -32,6 +32,12 @@ class DamiLocalDatasource(application: Context) {
         }
     }
 
+    fun deleteContactById(id: Int) : Completable{
+        return Completable.fromCallable {
+            db.contactsDao().deleteById(id)
+        }
+    }
+
     fun getContactById(id: Int) : Flowable<Contact> {
         return db.contactsDao().findById(id)
     }
