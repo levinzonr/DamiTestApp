@@ -60,9 +60,10 @@ class Repository {
         }
     }
 
-
     fun getContacts() : Flowable<List<Contact>> {
-        return local.getContacts()
+        return remote.getContacts(local.getUserToken()).map { it.response }.flatMap {
+            return@flatMap local.saveContacts(it).toSingleDefault(it).toFlowable()
+        }
     }
     fun getContactById(id: Int) : Flowable<Contact>{
         return local.getContactById(id)

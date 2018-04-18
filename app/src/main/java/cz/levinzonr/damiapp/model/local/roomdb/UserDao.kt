@@ -1,9 +1,6 @@
 package cz.levinzonr.damiapp.model.local.roomdb
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.OnConflictStrategy
-import android.arch.persistence.room.Query
+import android.arch.persistence.room.*
 import cz.levinzonr.damiapp.model.entities.User
 import io.reactivex.Flowable
 
@@ -15,4 +12,7 @@ interface UserDao {
 
     @Query("SELECT * FROM user WHERE id LIKE :id  ")
     fun findById(id: Int) : Flowable<User>
+
+    @Update
+    fun update(user: User)
 }
