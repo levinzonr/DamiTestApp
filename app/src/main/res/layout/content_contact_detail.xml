@@ -9,10 +9,10 @@
     tools:layout_editor_absoluteY="81dp"
     tools:showIn="@layout/activity_contact_detail">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/contact_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/contact_item_image_size"
+        android:layout_height="@dimen/contact_item_image_size"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"

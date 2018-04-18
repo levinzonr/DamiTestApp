@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.squareup.picasso.Picasso
 import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.model.entities.Contact
 import cz.levinzonr.damiapp.presenter.contacts.ContactsListPresenter
