@@ -21,6 +21,10 @@ class ContactsListAdapter(val presenter: ContactsListPresenter, val listener: On
 
         override fun set(contact: Contact) {
             view.contact_name.text = "${contact.name} ${contact.lastname} "
+            Picasso.get().load(contact.photo)
+                    .error(R.mipmap.ic_launcher)
+                    .placeholder(R.mipmap.ic_launcher)
+                    .into(view.contact_image)
             view.setOnClickListener({
                 listener.onItemSelected(contact)
             })

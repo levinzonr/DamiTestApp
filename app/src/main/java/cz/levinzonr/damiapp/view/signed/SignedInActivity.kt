@@ -9,7 +9,9 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.TextView
+import com.squareup.picasso.Picasso
 import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.model.entities.User
 import cz.levinzonr.damiapp.model.local.DamiLocalDatasource
@@ -98,6 +100,10 @@ class SignedInActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     override fun onUserInfoLoaded(user: User) {
         nav_view.getHeaderView(0).findViewById<TextView>(R.id.drawer_email).text = user.email
         nav_view.getHeaderView(0).findViewById<TextView>(R.id.drawer_name).text = user.displayName()
+        Picasso.get().load(user.photo)
+                .placeholder(R.mipmap.ic_launcher)
+                .into(nav_view.getHeaderView(0).findViewById<ImageView>(R.id.drawer_image))
+
     }
 
     override fun onLogoutComplete() {

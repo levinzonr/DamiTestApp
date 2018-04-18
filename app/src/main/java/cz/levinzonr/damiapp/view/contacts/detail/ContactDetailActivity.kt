@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.squareup.picasso.Picasso
 import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.model.entities.Contact
 import cz.levinzonr.damiapp.presenter.contacts.ContactDetailPresenter
@@ -79,6 +80,11 @@ class ContactDetailActivity : AppCompatActivity(), ContactDetailView {
         contact_name.text = "${result.name} ${result.lastname}"
         contact_phone.text = ""
         contact_email.text = result.email
+        Picasso.get().load(result.photo)
+                .error(R.mipmap.ic_launcher)
+                .placeholder(R.mipmap.ic_launcher)
+                .into(contact_image)
+
     }
 
     override fun onLoadingError(error: String) {
