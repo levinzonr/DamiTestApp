@@ -1,15 +1,18 @@
 package cz.levinzonr.damiapp.view.map
 
 import android.content.Context
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.model.entities.MapPoint
 import kotlinx.android.synthetic.main.content_edit_contact.*
 import kotlinx.android.synthetic.main.marker_info_view.view.*
+import java.lang.Exception
 
 class MarkerInfoAdapter(context: Context) : GoogleMap.InfoWindowAdapter {
     private val layoutInflater = LayoutInflater.from(context)
@@ -23,7 +26,16 @@ class MarkerInfoAdapter(context: Context) : GoogleMap.InfoWindowAdapter {
         Picasso.get().load((p0?.tag as MapPoint).photo.first())
                 .placeholder(R.mipmap.ic_launcher)
                 .error(R.mipmap.ic_launcher)
-                .into(view.marker_image)
+                .into(view.marker_image, object : Callback {
+                    override fun onSuccess() {
+                        if (p0.isInfoWindowShown)
+                            Handler().postDelayed({p0.showInfoWindow()}, 500)
+                    }
+
+                    override fun onError(e: Exception?) {
+
+                    }
+                })
         return view
     }
 }
