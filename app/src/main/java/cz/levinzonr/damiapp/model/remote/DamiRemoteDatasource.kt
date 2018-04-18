@@ -3,12 +3,10 @@ package cz.levinzonr.damiapp.model.remote
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.model.entities.Contact
 import cz.levinzonr.damiapp.model.entities.MapPoint
 import cz.levinzonr.damiapp.model.entities.User
 import io.reactivex.Flowable
-import org.intellij.lang.annotations.Flow
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
@@ -41,7 +39,7 @@ class DamiRemoteDatasource {
     }
 
     fun updateAccount(token: String, user: User, password: String?) : Flowable<Response<User>> {
-        return service.updateAccount(token, user.name, user.email, user.phone, user.lastName, password, user.description)
+        return service.updateAccount(token, user.name, user.email, user.phone, user.lastname, password, user.description)
     }
 
     fun getMapPoints() : Flowable<Response<ArrayList<MapPoint>>> {
