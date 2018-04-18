@@ -40,6 +40,10 @@ class DamiRemoteDatasource {
         return service.register(user.email, user.password)
     }
 
+    fun updateAccount(token: String, user: User, password: String?) : Flowable<Response<User>> {
+        return service.updateAccount(token, user.name, user.email, user.phone, user.lastName, password, user.description)
+    }
+
     fun getMapPoints() : Flowable<Response<ArrayList<MapPoint>>> {
         return service.getMapPoints()
     }
@@ -61,6 +65,7 @@ class DamiRemoteDatasource {
     fun deleteContact(token: String, id: Int) : Flowable<Response<Any>> {
         return service.deleteContact(token, id)
     }
+
 
     interface DamiService {
         @FormUrlEncoded
@@ -105,6 +110,16 @@ class DamiRemoteDatasource {
         fun deleteContact(@Field("token") token: String,
                           @Field("id") contactId: Int) : Flowable<Response<Any>>
 
+        @FormUrlEncoded
+        @POST("updateUser")
+        fun updateAccount(@Field("token") token: String,
+                          @Field("name") name: String?,
+                          @Field("email") email: String,
+                          @Field("phone") phone: String?,
+                          @Field("lastname") lastname: String?,
+                          @Field("password") password: String?,
+                          @Field("description") desc: String?
+        ) : Flowable<Response<User>>
 
     }
 
