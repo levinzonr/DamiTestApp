@@ -1,14 +1,12 @@
 package cz.levinzonr.damiapp.model.local
 
-import android.app.Application
 import android.content.Context
-import android.util.Log
 import cz.levinzonr.damiapp.model.entities.Contact
 import cz.levinzonr.damiapp.model.entities.MapPoint
 import cz.levinzonr.damiapp.model.entities.User
+import cz.levinzonr.damiapp.model.local.roomdb.AppDatabase
 import io.reactivex.Completable
 import io.reactivex.Flowable
-import org.intellij.lang.annotations.Flow
 
 class DamiLocalDatasource(application: Context) {
     private val db = AppDatabase.getInstance(application)

@@ -1,9 +1,7 @@
-package cz.levinzonr.damiapp.model.local
+package cz.levinzonr.damiapp.model.local.roomdb
 
-import android.app.Application
 import android.arch.persistence.room.*
 import android.content.Context
-import android.util.Log
 import cz.levinzonr.damiapp.model.entities.Contact
 import cz.levinzonr.damiapp.model.entities.Converters
 import cz.levinzonr.damiapp.model.entities.MapPoint
@@ -19,7 +17,7 @@ abstract class AppDatabase : RoomDatabase() {
 
         const val DB_NAME = "AppDatabase"
 
-        fun getInstance(application: Context)  : AppDatabase{
+        fun getInstance(application: Context)  : AppDatabase {
             if (instance == null) {
                 instance = Room.databaseBuilder(application, AppDatabase::class.java, DB_NAME).build()
             }

@@ -1,4 +1,4 @@
-package cz.levinzonr.damiapp.model.local
+package cz.levinzonr.damiapp.model.local.roomdb
 
 import android.arch.persistence.room.*
 import cz.levinzonr.damiapp.model.entities.Contact
