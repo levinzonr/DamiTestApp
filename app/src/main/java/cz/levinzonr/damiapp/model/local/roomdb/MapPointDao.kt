@@ -6,6 +6,7 @@ import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
 import cz.levinzonr.damiapp.model.entities.MapPoint
 import io.reactivex.Flowable
+import org.intellij.lang.annotations.Flow
 
 @Dao
 interface MapPointDao {
@@ -19,4 +20,6 @@ interface MapPointDao {
     @Query("SELECT * FROM mappoint WHERE userId LIKE :userId")
     fun findPointsOfUser(userId: Int) : Flowable<List<MapPoint>>
 
+    @Query("SELECT * FROM mappoint")
+    fun findAll() : Flowable<List<MapPoint>>
 }

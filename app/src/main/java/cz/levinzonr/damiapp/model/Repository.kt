@@ -8,12 +8,14 @@ import cz.levinzonr.damiapp.model.local.DamiLocalDatasource
 import cz.levinzonr.damiapp.model.remote.DamiRemoteDatasource
 import cz.levinzonr.damiapp.model.remote.PostObject
 import cz.levinzonr.damiapp.model.remote.Response
+import cz.levinzonr.yoyofilms.androidutils.NetManager
 import io.reactivex.Completable
 import io.reactivex.Flowable
 
 class Repository {
     private val local = DamiLocalDatasource(MyApp.getContext())
     private val remote = DamiRemoteDatasource()
+    private val netManager = NetManager(MyApp.getContext())
 
     companion object {
         fun MockContacts() : ArrayList<Contact> {
@@ -50,10 +52,14 @@ class Repository {
         return local.getCurrentUser()
     }
 
-    fun getPointsOnMap() : Flowable<Response<ArrayList<MapPoint>>> {
-        return remote.getMapPoints().flatMap {
-            return@flatMap local.saveMapPoints(it.response).toSingleDefault(it).toFlowable()
+    fun getPointsOnMap() : Flowable<ArrayList<MapPoint>> {
+
+        if (netManager.isConnected()) {
+            return remote.getMapPoints().map { it.response }.flatMap {
+                return@flatMap local.saveMapPoints(it).toSingleDefault(it).toFlowable()
+            }
         }
+        return local.getMapPoints().map { t: List<MapPoint> -> ArrayList(t) }
     }
 
     fun getFavoritePoints() : Flowable<List<MapPoint>> {
@@ -67,10 +73,14 @@ class Repository {
     }
 
     fun getContacts() : Flowable<List<Contact>> {
-        return remote.getContacts(local.getUserToken()).map { it.response }.flatMap {
-            return@flatMap local.saveContacts(it).toSingleDefault(it).toFlowable()
+        if (netManager.isConnected()) {
+            return remote.getContacts(local.getUserToken()).map { it.response }.flatMap {
+                return@flatMap local.saveContacts(it).toSingleDefault(it).toFlowable()
+            }
         }
+        return local.getContacts()
     }
+
     fun getContactById(id: Int) : Flowable<Contact>{
         return local.getContactById(id)
     }

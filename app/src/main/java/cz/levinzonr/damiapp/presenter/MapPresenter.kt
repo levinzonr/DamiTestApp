@@ -24,7 +24,7 @@ class MapPresenter : Presenter<MapView>{
         cd.add(repository.getPointsOnMap()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({resp: Response<ArrayList<MapPoint>>? -> view?.onLoadingFinished(resp!!.response) },
+                .subscribe({resp: ArrayList<MapPoint>? -> resp?.let {view?.onLoadingFinished(it)} },
                         {error: Throwable? ->  view?.onLoadingError(ErrorHandler().handleError(error!!))}
 
                 ))

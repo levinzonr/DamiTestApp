@@ -7,6 +7,7 @@ import cz.levinzonr.damiapp.model.entities.User
 import cz.levinzonr.damiapp.model.local.roomdb.AppDatabase
 import io.reactivex.Completable
 import io.reactivex.Flowable
+import org.intellij.lang.annotations.Flow
 
 class DamiLocalDatasource(application: Context) {
     private val db = AppDatabase.getInstance(application)
@@ -38,6 +39,10 @@ class DamiLocalDatasource(application: Context) {
 
     fun getUserMapPoints() : Flowable<List<MapPoint>> {
         return db.mapPointDao().findPointsOfUser(prefs.getUserId())
+    }
+
+    fun getMapPoints() : Flowable<List<MapPoint>> {
+        return db.mapPointDao().findAll()
     }
 
     fun saveContacts(arrayList: ArrayList<Contact>) : Completable {
