@@ -131,5 +131,7 @@
     </string>
     <string name="title_activity_account_edit">AccountEditActivity</string>
     <string name="hint_description">Description</string>
+    <string name="error_title">Error</string>
+    <string name="post_success">Account updated</string>
 
 </resources>

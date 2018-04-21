@@ -1,8 +1,11 @@
 package cz.levinzonr.damiapp.view.account
 
+import android.content.DialogInterface
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.widget.Toast
 import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.extensions.EditTextListener
 import cz.levinzonr.damiapp.model.entities.User
@@ -41,10 +44,17 @@ class AccountEditActivity : AppCompatActivity(), AccountEditView {
 
     override fun onPostChangesError(error: String) {
         Log.d(TAG, "PostError: $error")
+        AlertDialog.Builder(this)
+                .setTitle(R.string.error_title)
+                .setMessage(error)
+                .setNeutralButton(android.R.string.ok, { _, _ ->  })
+                .create().show()
     }
 
     override fun onPostChangesSuccess() {
         Log.d(TAG, "Updated")
+        Toast.makeText(this, getString(R.string.post_success), Toast.LENGTH_SHORT).show()
+        onBackPressed()
     }
 
     override fun onInputError() {
@@ -65,6 +75,7 @@ class AccountEditActivity : AppCompatActivity(), AccountEditView {
 
     override fun onLoadingError(error: String) {
         Log.d(TAG, "LoadEror: $error")
+
     }
 
     override fun onDestroy() {
