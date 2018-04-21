@@ -32,6 +32,12 @@ class Repository {
         }
     }
 
+    fun updateAccount(user: User, password: String?) : Flowable<Response<User>> {
+        return remote.updateAccount(local.getUserToken(), user, password).flatMap {
+            return@flatMap local.updateUser(it.response).toSingleDefault(it).toFlowable()
+        }
+    }
+
     fun register(user: PostObject.Register) : Flowable<Response<User>> {
         return remote.userRegister(user).flatMap {
             return@flatMap local.afterLogin(it.response).toSingleDefault(it).toFlowable()

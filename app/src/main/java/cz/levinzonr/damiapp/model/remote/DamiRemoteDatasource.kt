@@ -109,7 +109,7 @@ class DamiRemoteDatasource {
                           @Field("id") contactId: Int) : Flowable<Response<Any>>
 
         @FormUrlEncoded
-        @POST("updateUser")
+        @POST("updateAccount")
         fun updateAccount(@Field("token") token: String,
                           @Field("name") name: String?,
                           @Field("email") email: String,

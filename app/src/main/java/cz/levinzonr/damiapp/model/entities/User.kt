@@ -31,7 +31,7 @@ import android.arch.persistence.room.PrimaryKey
     constructor() : this(-1, "mail", null,null,null, "admin", null,null, ArrayList<MapPoint>(), "")
 
     fun displayName() : String{
-        return "$name $lastname"
+        return "${name ?: ""} ${lastname ?: ""}"
     }
 
 }

@@ -24,6 +24,12 @@ class DamiLocalDatasource(application: Context) {
         }
     }
 
+    fun updateUser(user: User) : Completable {
+        return Completable.fromCallable {
+            db.userDao().update(user)
+        }
+    }
+
     fun saveMapPoints(list: List<MapPoint>) : Completable {
         return Completable.fromCallable {
             db.mapPointDao().insertAll(list)
