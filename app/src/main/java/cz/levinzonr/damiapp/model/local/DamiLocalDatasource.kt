@@ -86,6 +86,7 @@ class DamiLocalDatasource(application: Context) {
 
     fun logout() {
         prefs.clear()
+        db.clearAllTables()
     }
 
 
