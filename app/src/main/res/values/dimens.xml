@@ -8,4 +8,6 @@
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="contact_item_image_size">80dp</dimen>
+    <dimen name="account_image_size">100dp</dimen>
+    <dimen name="content_margin">16dp</dimen>
 </resources>

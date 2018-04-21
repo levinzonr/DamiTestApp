@@ -1,13 +1,14 @@
-package cz.levinzonr.damiapp.presenter
+package cz.levinzonr.damiapp.presenter.account
 
 import cz.levinzonr.damiapp.model.Repository
 import cz.levinzonr.damiapp.model.entities.User
+import cz.levinzonr.damiapp.presenter.Presenter
 import cz.levinzonr.damiapp.view.account.AccountDetailsView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class AccountDetailsPresenter : Presenter<AccountDetailsView>{
+class AccountDetailsPresenter : Presenter<AccountDetailsView> {
 
     private val repository = Repository()
     private var view : AccountDetailsView? = null
@@ -23,9 +24,8 @@ class AccountDetailsPresenter : Presenter<AccountDetailsView>{
         cd.add(repository.getCurrentUser()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({t: User? -> view?.onLoadingFinished(t!!) }))
+                .subscribe({t: User? -> t?.let { view?.onLoadingFinished(t)} }))
     }
-
     override fun detachView() {
         view = null
         if (!cd.isDisposed) cd.dispose()

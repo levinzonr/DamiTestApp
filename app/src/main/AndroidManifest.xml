@@ -58,6 +58,10 @@
         <activity
             android:name=".view.map.PointDetailActivity"
             android:label="@string/title_activity_point_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.account.AccountEditActivity"
+            android:label="@string/title_activity_account_edit"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

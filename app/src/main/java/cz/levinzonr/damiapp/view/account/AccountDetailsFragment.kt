@@ -1,6 +1,7 @@
 package cz.levinzonr.damiapp.view.account
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -10,18 +11,9 @@ import android.view.ViewGroup
 
 import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.model.entities.User
-import cz.levinzonr.damiapp.presenter.AccountDetailsPresenter
+import cz.levinzonr.damiapp.presenter.account.AccountDetailsPresenter
 import kotlinx.android.synthetic.main.fragment_account_details.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- *
- */
 class AccountDetailsFragment : Fragment(), AccountDetailsView {
 
     private lateinit var presenter: AccountDetailsPresenter
@@ -47,6 +39,7 @@ class AccountDetailsFragment : Fragment(), AccountDetailsView {
         super.onViewCreated(view, savedInstanceState)
         presenter = AccountDetailsPresenter()
         presenter.attachView(this)
+        button_edit.setOnClickListener({ startActivity(Intent(context, AccountEditActivity::class.java))})
     }
 
     override fun onLoadingStarted() {
@@ -56,7 +49,7 @@ class AccountDetailsFragment : Fragment(), AccountDetailsView {
     override fun onLoadingFinished(result: User) {
         account_email.text = result.email
         account_description.text = (result.description ?: getString(R.string.unknown))
-        account_name.text = (result.name ?: getString(R.string.unknown))
+        account_name.text = (result.displayName())
         account_phone.text = (result.phone ?: getString(R.string.unknown))
     }
 
@@ -64,8 +57,8 @@ class AccountDetailsFragment : Fragment(), AccountDetailsView {
         Log.d(TAG, "Error: $error")
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         presenter.detachView()
     }
 }
