@@ -1,6 +1,5 @@
 package cz.levinzonr.damiapp.view.account
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -8,6 +7,8 @@ import android.util.Log
 import android.widget.Toast
 import cz.levinzonr.damiapp.R
 import cz.levinzonr.damiapp.extensions.EditTextListener
+import cz.levinzonr.damiapp.extensions.onTextChange
+import cz.levinzonr.damiapp.extensions.validEmail
 import cz.levinzonr.damiapp.model.entities.User
 import cz.levinzonr.damiapp.presenter.account.AccountEditPresenter
 
@@ -29,11 +30,14 @@ class AccountEditActivity : AppCompatActivity(), AccountEditView {
         presenter = AccountEditPresenter()
         presenter.attachView(this)
 
-        input_lastname.addTextChangedListener(EditTextListener{presenter.setLastname(it)})
-        input_phone.addTextChangedListener(EditTextListener{presenter.setPhone(it)})
-        input_name.addTextChangedListener(EditTextListener{presenter.setName(it)})
-        input_email.addTextChangedListener(EditTextListener{presenter.setEmail(it)})
-        input_desc.addTextChangedListener(EditTextListener{presenter.setDescription(it)})
+        input_lastname.onTextChange { presenter.setLastname(it) }
+        input_phone.onTextChange { presenter.setPhone(it) }
+        input_name.onTextChange { presenter.setName(it) }
+        input_email.onTextChange {
+            input_email.error = if (it.validEmail()) null else "BadEmail"
+            presenter.setEmail(it)
+        }
+        input_desc.onTextChange { presenter.setDescription(it) }
 
 
         fab.setOnClickListener { view ->
