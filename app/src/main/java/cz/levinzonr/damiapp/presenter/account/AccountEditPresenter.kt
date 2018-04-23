@@ -5,7 +5,7 @@ import cz.levinzonr.damiapp.model.entities.User
 import cz.levinzonr.damiapp.model.remote.Response
 import cz.levinzonr.damiapp.presenter.Presenter
 import cz.levinzonr.damiapp.utils.ErrorHandler
-import cz.levinzonr.damiapp.view.account.AccountEditView
+import cz.levinzonr.damiapp.view.account.edit.AccountEditView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

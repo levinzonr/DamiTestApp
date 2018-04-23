@@ -1,7 +1,6 @@
-package cz.levinzonr.damiapp.view.account
+package cz.levinzonr.damiapp.view.account.details
 
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log

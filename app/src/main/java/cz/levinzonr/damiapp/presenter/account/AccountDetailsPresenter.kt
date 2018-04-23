@@ -3,7 +3,7 @@ package cz.levinzonr.damiapp.presenter.account
 import cz.levinzonr.damiapp.model.Repository
 import cz.levinzonr.damiapp.model.entities.User
 import cz.levinzonr.damiapp.presenter.Presenter
-import cz.levinzonr.damiapp.view.account.AccountDetailsView
+import cz.levinzonr.damiapp.view.account.details.AccountDetailsView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

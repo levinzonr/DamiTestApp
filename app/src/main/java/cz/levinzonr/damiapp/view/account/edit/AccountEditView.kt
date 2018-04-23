@@ -1,4 +1,4 @@
-package cz.levinzonr.damiapp.view.account
+package cz.levinzonr.damiapp.view.account.edit
 
 import cz.levinzonr.damiapp.model.entities.User
 import cz.levinzonr.damiapp.view.BaseView

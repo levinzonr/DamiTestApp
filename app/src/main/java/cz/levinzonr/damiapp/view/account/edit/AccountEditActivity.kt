@@ -1,4 +1,4 @@
-package cz.levinzonr.damiapp.view.account
+package cz.levinzonr.damiapp.view.account.edit
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
 import cz.levinzonr.damiapp.R
-import cz.levinzonr.damiapp.extensions.EditTextListener
 import cz.levinzonr.damiapp.extensions.onTextChange
 import cz.levinzonr.damiapp.extensions.validEmail
 import cz.levinzonr.damiapp.model.entities.User
