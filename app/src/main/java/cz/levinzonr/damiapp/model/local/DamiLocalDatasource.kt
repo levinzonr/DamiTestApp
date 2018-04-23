@@ -57,6 +57,12 @@ class DamiLocalDatasource(application: Context) {
         }
     }
 
+    fun updateContact(contact: Contact) : Completable {
+        return Completable.fromCallable {
+            db.contactsDao().update(contact)
+        }
+    }
+
     fun deleteContactById(id: Int) : Completable{
         return Completable.fromCallable {
             db.contactsDao().deleteById(id)

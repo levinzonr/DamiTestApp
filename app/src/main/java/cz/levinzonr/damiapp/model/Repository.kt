@@ -66,11 +66,6 @@ class Repository {
         return local.getUserMapPoints()
     }
 
-    fun updateContacts() : Flowable<Response<ArrayList<Contact>>> {
-        return  remote.getContacts(local.getUserToken()).flatMap {
-            return@flatMap local.saveContacts(it.response).toSingleDefault(it).toFlowable()
-        }
-    }
 
     fun getContacts() : Flowable<List<Contact>> {
         if (netManager.isConnected()) {
@@ -95,7 +90,9 @@ class Repository {
                 return@flatMap local.saveContact(it.response).toSingleDefault(it).toFlowable()
             }
         }
-        else remote.updateContact(local.getUserToken(), contact)
+        else remote.updateContact(local.getUserToken(), contact).flatMap {
+            return@flatMap local.updateContact(contact).toSingleDefault(it).toFlowable()
+        }
     }
 
     fun deleteContact(id: Int) : Flowable<Response<Any>> {

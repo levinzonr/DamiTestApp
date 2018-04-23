@@ -22,15 +22,15 @@ class ContactsListPresenter : Presenter<ContactsListView> {
 
     override fun attachView(view: ContactsListView) {
         this.view = view
-    //    updateContacts()
 
     }
 
     fun updateContacts() {
-       cd.add(repository.updateContacts()
-               .observeOn(AndroidSchedulers.mainThread())
+       cd.add(repository.getContacts()
                .subscribeOn(Schedulers.io())
-               .subscribe())
+               .observeOn(AndroidSchedulers.mainThread())
+               .subscribe({t: List<Contact>? -> t?.let { items = ArrayList(t) }})
+       )
 
     }
 

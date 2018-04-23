@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.view.ViewCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,9 +55,14 @@ class ContactsListFragment : Fragment(), ContactsListView, ContactsListAdapter.O
         button_create.setOnClickListener({
             EditContactActivity.startAsIntent(context, null)
         })
-
-
     }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("ListDebug", "Reslume")
+        presenter.updateContacts()
+    }
+
 
     override fun onEmptyView() {
         Toast.makeText(context, "Empty", Toast.LENGTH_SHORT).show()
