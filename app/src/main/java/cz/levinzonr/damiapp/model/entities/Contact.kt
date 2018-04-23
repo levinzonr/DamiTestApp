@@ -11,5 +11,13 @@ class Contact(
         var name: String? = "",
         var lastname: String? = "",
         var description: String? = "",
-        var photo: String? = null
-)
+        var photo: String? = null,
+        var phone: String? = null
+) {
+
+    fun displayName(): String? {
+        return if (name == null && lastname == null)
+            null
+        else "$name $lastname"
+    }
+}

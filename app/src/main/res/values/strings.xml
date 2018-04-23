@@ -133,5 +133,8 @@
     <string name="hint_description">Description</string>
     <string name="error_title">Error</string>
     <string name="post_success">Account updated</string>
+    <string name="error_invalid_field">Invalid Field</string>
+    <string name="error_invalid_email">Invalid email</string>
+    <string name="field_not_available">Unknown</string>
 
 </resources>

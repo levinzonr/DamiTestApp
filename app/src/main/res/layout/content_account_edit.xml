@@ -16,7 +16,7 @@
         android:layout_marginStart="@dimen/content_margin"
         android:layout_marginTop="@dimen/content_margin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <EditText
@@ -86,4 +86,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_phone" />
+
 </android.support.constraint.ConstraintLayout>

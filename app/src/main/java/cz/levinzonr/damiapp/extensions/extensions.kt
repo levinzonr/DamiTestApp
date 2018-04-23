@@ -3,6 +3,8 @@ package cz.levinzonr.damiapp.extensions
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
+import android.widget.TextView
+import cz.levinzonr.damiapp.R
 
 
 fun EditText.onTextChange(onChange : (String) -> Unit) {
@@ -26,4 +28,10 @@ fun String.validEmail() : Boolean {
 
 fun String.valid() : Boolean {
     return this.length > 4
+}
+
+fun TextView.letText(string: String?) {
+    if (string == null || string.isEmpty())
+        this.text = context.getString(R.string.field_not_available)
+    else this.text = string
 }

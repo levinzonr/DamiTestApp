@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.squareup.picasso.Picasso
 import cz.levinzonr.damiapp.R
+import cz.levinzonr.damiapp.extensions.letText
 import cz.levinzonr.damiapp.model.entities.Contact
 import cz.levinzonr.damiapp.presenter.contacts.ContactsListPresenter
 import kotlinx.android.synthetic.main.item_contact.view.*
@@ -20,7 +21,7 @@ class ContactsListAdapter(val presenter: ContactsListPresenter, val listener: On
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view), RecycledItemView {
 
         override fun set(contact: Contact) {
-            view.contact_name.text = "${contact.name} ${contact.lastname} "
+            view.contact_name.letText(contact.displayName())
             Picasso.get().load(contact.photo)
                     .error(R.mipmap.ic_launcher)
                     .placeholder(R.mipmap.ic_launcher)

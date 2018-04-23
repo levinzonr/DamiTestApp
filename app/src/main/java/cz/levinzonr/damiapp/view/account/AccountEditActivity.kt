@@ -1,6 +1,7 @@
 package cz.levinzonr.damiapp.view.account
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -29,19 +30,22 @@ class AccountEditActivity : AppCompatActivity(), AccountEditView {
         setSupportActionBar(toolbar)
         presenter = AccountEditPresenter()
         presenter.attachView(this)
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener { onBackPressed() }
         input_lastname.onTextChange { presenter.setLastname(it) }
         input_phone.onTextChange { presenter.setPhone(it) }
         input_name.onTextChange { presenter.setName(it) }
         input_email.onTextChange {
-            input_email.error = if (it.validEmail()) null else "BadEmail"
+            input_email.error = if (it.validEmail()) null else getString(R.string.error_invalid_email)
             presenter.setEmail(it)
         }
         input_desc.onTextChange { presenter.setDescription(it) }
 
 
         fab.setOnClickListener { view ->
-            presenter.postChanges()
+            if (input_email.error == null)
+                 presenter.postChanges()
+            else Snackbar.make(view, R.string.error_invalid_field, Snackbar.LENGTH_SHORT).show()
         }
     }
 

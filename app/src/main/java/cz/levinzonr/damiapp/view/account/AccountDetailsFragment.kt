@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import cz.levinzonr.damiapp.R
+import cz.levinzonr.damiapp.extensions.letText
 import cz.levinzonr.damiapp.model.entities.User
 import cz.levinzonr.damiapp.presenter.account.AccountDetailsPresenter
 import kotlinx.android.synthetic.main.fragment_account_details.*
@@ -46,10 +47,10 @@ class AccountDetailsFragment : Fragment(), AccountDetailsView {
     }
 
     override fun onLoadingFinished(result: User) {
-        account_email.text = result.email
-        account_description.text = (result.description ?: getString(R.string.unknown))
-        account_name.text = (result.displayName())
-        account_phone.text = (result.phone ?: getString(R.string.unknown))
+        account_email.letText( result.email)
+        account_description.letText( result.description )
+        account_name.letText(result.displayName())
+        account_phone.letText(result.phone)
     }
 
     override fun onLoadingError(error: String) {

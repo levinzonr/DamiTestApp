@@ -11,6 +11,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.squareup.picasso.Picasso
 import cz.levinzonr.damiapp.R
+import cz.levinzonr.damiapp.extensions.letText
 import cz.levinzonr.damiapp.model.entities.Contact
 import cz.levinzonr.damiapp.presenter.contacts.ContactDetailPresenter
 import cz.levinzonr.damiapp.view.contacts.edit.EditContactActivity
@@ -39,12 +40,16 @@ class ContactDetailActivity : AppCompatActivity(), ContactDetailView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact_detail)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener { onBackPressed() }
         presenter = ContactDetailPresenter()
         presenter.attachView(this)
         presenter.setContactId(intent.getIntExtra(ARG_ID, -1))
         fab.setOnClickListener { view ->
             EditContactActivity.startAsIntent(this, intent.getIntExtra(ARG_ID, -1))
         }
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -77,9 +82,9 @@ class ContactDetailActivity : AppCompatActivity(), ContactDetailView {
     }
 
     override fun onLoadingFinished(result: Contact) {
-        contact_name.text = "${result.name} ${result.lastname}"
-        contact_phone.text = ""
-        contact_email.text = result.email
+        contact_name.letText( result.displayName())
+        contact_phone.letText(result.phone)
+        contact_email.letText( result.email)
         Picasso.get().load(result.photo)
                 .error(R.mipmap.ic_launcher)
                 .placeholder(R.mipmap.ic_launcher)

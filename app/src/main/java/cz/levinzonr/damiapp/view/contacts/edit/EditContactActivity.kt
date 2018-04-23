@@ -37,6 +37,7 @@ class EditContactActivity : AppCompatActivity(), ContactEditView {
         setSupportActionBar(toolbar)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar?.setNavigationOnClickListener { onBackPressed() }
         presenter = ContactEditPresenter()
         presenter.attachView(this)
         presenter.setContactId(intent.getIntExtra(ARG_ID, -1))
@@ -67,7 +68,7 @@ class EditContactActivity : AppCompatActivity(), ContactEditView {
 
     override fun onLoadingFinished(result: Contact) {
         supportActionBar?.title = result.name
-        contact_input_phone.setText("phone")
+        contact_input_phone.setText(result.phone)
         contact_input_email.setText(result.email)
         contact_input_lastname.setText(result.lastname)
         contact_input_name.setText(result.name)
@@ -97,6 +98,7 @@ class EditContactActivity : AppCompatActivity(), ContactEditView {
     }
 
     override fun onChangesLoaded() {
+        onBackPressed()
         Toast.makeText(this, "Changes uploaded", Toast.LENGTH_SHORT).show()
     }
 
