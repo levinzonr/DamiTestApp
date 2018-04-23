@@ -3,6 +3,7 @@ package cz.levinzonr.damiapp.view.contacts.list
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -48,6 +49,7 @@ class ContactsListFragment : Fragment(), ContactsListView, ContactsListAdapter.O
             adapter = contactsAdapter
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
+        ViewCompat.setNestedScrollingEnabled(recycler_view, false)
 
         button_create.setOnClickListener({
             EditContactActivity.startAsIntent(context, null)

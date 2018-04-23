@@ -10,7 +10,6 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
-        android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.design.widget.CollapsingToolbarLayout
@@ -19,14 +18,14 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:layout_scrollFlags="exitUntilCollapsed|scroll"
             app:toolbarId="@+id/toolbar">
 
             <ImageView
+                android:visibility="visible"
                 android:id="@+id/user_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="pin" />
 
@@ -41,5 +40,16 @@
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_signed_in" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/button_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchor="@id/app_bar"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_anchorGravity="end|bottom"
+        android:src="@drawable/ic_mode_edit_white_24dp"
+        app:fabSize="normal"
+        />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -39,7 +39,6 @@ class AccountDetailsFragment : Fragment(), AccountDetailsView {
         super.onViewCreated(view, savedInstanceState)
         presenter = AccountDetailsPresenter()
         presenter.attachView(this)
-        button_edit.setOnClickListener({ startActivity(Intent(context, AccountEditActivity::class.java))})
     }
 
     override fun onLoadingStarted() {

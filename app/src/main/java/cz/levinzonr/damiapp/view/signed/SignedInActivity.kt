@@ -8,7 +8,9 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.ViewUtils
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
@@ -17,6 +19,7 @@ import cz.levinzonr.damiapp.model.entities.User
 import cz.levinzonr.damiapp.model.local.DamiLocalDatasource
 import cz.levinzonr.damiapp.presenter.MainPresenter
 import cz.levinzonr.damiapp.view.account.AccountDetailsFragment
+import cz.levinzonr.damiapp.view.account.AccountEditActivity
 import cz.levinzonr.damiapp.view.contacts.list.ContactsListFragment
 import cz.levinzonr.damiapp.view.map.MapsFragment
 import cz.levinzonr.damiapp.view.unsigned.NotSignedActivity
@@ -33,20 +36,23 @@ class SignedInActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         setSupportActionBar(toolbar)
         presenter = MainPresenter()
         presenter.attachView(this)
-        val local = DamiLocalDatasource(this)
 
-        if (!local.isLoggedIn()) {
+        if (!presenter.isLoggedIn()) {
             val intent = Intent(this, NotSignedActivity::class.java)
             startActivity(intent)
             finish()
         }
 
+        replace(AccountDetailsFragment())
+
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
-
         nav_view.setNavigationItemSelectedListener(this)
+
+        button_edit.setOnClickListener({startActivity(Intent(this, AccountEditActivity::class.java))})
+
     }
 
     override fun onResume() {
@@ -82,13 +88,20 @@ class SignedInActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             }
             R.id.button_contacts -> {
                 replace(ContactsListFragment())
+                app_bar.setExpanded(false, true)
+                toolbar_layout.title = getString(R.string.title_contacts)
             }
             R.id.button_map -> {
                 replace(MapsFragment())
+                app_bar.setExpanded(false, true)
+                toolbar_layout.title = getString(R.string.title_maps)
+
             }
 
             R.id.button_account -> {
                 replace(AccountDetailsFragment.newInstance())
+                app_bar.setExpanded(true, true)
+                toolbar_layout.title = getString(R.string.title_account)
             }
 
          }
@@ -102,7 +115,12 @@ class SignedInActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         nav_view.getHeaderView(0).findViewById<TextView>(R.id.drawer_name).text = user.displayName()
         Picasso.get().load(user.photo)
                 .placeholder(R.mipmap.ic_launcher)
+                .error(R.mipmap.ic_launcher)
                 .into(nav_view.getHeaderView(0).findViewById<ImageView>(R.id.drawer_image))
+        Picasso.get().load(user.photo)
+                .placeholder(R.mipmap.ic_launcher)
+                .error(R.mipmap.ic_launcher)
+                .into(user_image)
 
     }
 
